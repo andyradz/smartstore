@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.codigo.smartstore</groupId>
+	<artifactId>smartstore</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>smartstore-core</module>
+		<module>smartstore-webapi</module>
+		<module>smartstore-sdk</module>
+		<module>smartstore-database</module>
+	</modules>
+
+	<dependencyManagement>
+
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.11</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.hamcrest</groupId>
+				<artifactId>hamcrest-library</artifactId>
+				<version>1.3</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.javamoney</groupId>
+				<artifactId>moneta</artifactId>
+				<version>1.1</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.eclipse.collections/eclipse-collections -->
+			<dependency>
+				<groupId>org.eclipse.collections</groupId>
+				<artifactId>eclipse-collections</artifactId>
+				<version>10.4.0</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/org.checkerframework/checker -->
+			<dependency>
+				<groupId>org.checkerframework</groupId>
+				<artifactId>checker</artifactId>
+				<version>3.7.0</version>
+			</dependency>
+
+			<!-- https://mvnrepository.com/artifact/javax.inject/javax.inject -->
+			<dependency>
+				<groupId>javax.inject</groupId>
+				<artifactId>javax.inject</artifactId>
+				<version>1</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
+</project>
