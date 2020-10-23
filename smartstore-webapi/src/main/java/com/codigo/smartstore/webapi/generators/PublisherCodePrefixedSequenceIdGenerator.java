@@ -16,22 +16,14 @@ import org.hibernate.type.Type;
  * <pre>
  *
  * &#64;Id
- * &#64;GeneratedValue(
- * 	strategy = GenerationType.SEQUENCE,
- * 	generator = "book_seq")
+ * &#64;GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_seq")
  * &#64;GenericGenerator(
  * 	name = "book_seq",
  * 	strategy = "org.thoughts.on.java.generators.PublisherCodePrefixedSequenceIdGenerator",
  * 	parameters = {
- * 		&#64;Parameter(
- * 			name = PublisherCodePrefixedSequenceIdGenerator.INCREMENT_PARAM,
- * 			value = "50"),
- * 		&#64;Parameter(
- * 			name = PublisherCodePrefixedSequenceIdGenerator.CODE_NUMBER_SEPARATOR_PARAMETER,
- * 			value = "_"),
- * 		&#64;Parameter(
- * 			name = PublisherCodePrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER,
- * 			value = "%05d") })
+ * 		&#64;Parameter(name = PublisherCodePrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "50"),
+ * 		&#64;Parameter(name = PublisherCodePrefixedSequenceIdGenerator.CODE_NUMBER_SEPARATOR_PARAMETER, value = "_"),
+ * 		&#64;Parameter(name = PublisherCodePrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER, value = "%05d") })
  * private String id;
  * </pre>
  *
@@ -47,8 +39,6 @@ public class PublisherCodePrefixedSequenceIdGenerator
 
 	public static final String NUMBER_FORMAT_PARAMETER = "numberFormat";
 	public static final String NUMBER_FORMAT_DEFAULT = "%05d";
-
-	private String format;
 
 	@Override
 	public Serializable generate(final SharedSessionContractImplementor session, final Object object)
@@ -68,12 +58,10 @@ public class PublisherCodePrefixedSequenceIdGenerator
 			throws MappingException {
 
 		super.configure(LongType.INSTANCE, params, serviceRegistry);
-		final String codeNumberSeparator = ConfigurationHelper
-				.getString(CODE_NUMBER_SEPARATOR_PARAMETER, params, CODE_NUMBER_SEPARATOR_DEFAULT);
+		final String codeNumberSeparator = ConfigurationHelper.getString(CODE_NUMBER_SEPARATOR_PARAMETER, params,
+			CODE_NUMBER_SEPARATOR_DEFAULT);
 		final String numberFormat = ConfigurationHelper
 				.getString(NUMBER_FORMAT_PARAMETER, params, NUMBER_FORMAT_DEFAULT)
 				.replace("%", "%2");
-		this.format = "%1$s" + codeNumberSeparator
-				+ numberFormat;
 	}
 }

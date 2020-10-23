@@ -9,7 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @DisplayName("Zestaw testów badania znaku (plus, minus) typu money")
-public class TestsMoneyInWordsSign {
+class TestsMoneyInWordsSign {
 
 	/**
 	 * Znacznik wartości dodatniej liczby rzeczywistej

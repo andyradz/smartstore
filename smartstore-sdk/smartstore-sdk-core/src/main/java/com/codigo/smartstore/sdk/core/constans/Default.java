@@ -8,7 +8,7 @@ import java.util.Map;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
- * Klasa dostarcza wartości domyślne dla podstawowych typów klas dostępnych na
+ * Klasa dostarcza wartości domyślne dla podstawowych typów klas dostępnych na23
  * platformie JVM.
  *
  * @author andrzej.radziszewski

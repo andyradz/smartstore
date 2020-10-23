@@ -6,10 +6,12 @@ import static org.junit.Assert.assertThat;
 
 import java.util.function.LongUnaryOperator;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.codigo.smartstore.sdk.core.sequence.Sequence;
 
+@DisplayName("Testy operatory wyznacznia liczby dziesiątek z wartości liczby")
 class TestsMoneyInWordsTens {
 
 	/**
@@ -24,8 +26,8 @@ class TestsMoneyInWordsTens {
 		Sequence.sequence(20L, 29L, 1)
 				.forEach(item -> {
 
-					final var val = hasTens.applyAsLong(item);
-					System.out.println(String.format("%03d - %03d", item, val));
+					hasTens.applyAsLong(item);
+					// System.out.println(String.format("%03d - %03d", item, val));
 					assertThat(2L, equalTo(hasTens.applyAsLong(item)));
 				});
 	}
@@ -36,8 +38,8 @@ class TestsMoneyInWordsTens {
 		Sequence.sequence(11L, 19L, 1)
 				.forEach(item -> {
 
-					final var val = hasTens.applyAsLong(item);
-					System.out.println(String.format("%03d - %03d", item, val));
+					hasTens.applyAsLong(item);
+					// System.out.println(String.format("%03d - %03d", item, val));
 					assertThat(0L, equalTo(hasTens.applyAsLong(item)));
 				});
 	}
@@ -48,8 +50,8 @@ class TestsMoneyInWordsTens {
 		Sequence.sequence(0L, 9L, 1)
 				.forEach(item -> {
 
-					final var val = hasTens.applyAsLong(item);
-					System.out.println(String.format("%03d - %03d", item, val));
+					hasTens.applyAsLong(item);
+					// System.out.println(String.format("%03d - %03d", item, val));
 					assertThat(0L, equalTo(hasTens.applyAsLong(item)));
 				});
 	}
@@ -60,8 +62,8 @@ class TestsMoneyInWordsTens {
 		Sequence.sequence(11L, 911L, 100)
 				.forEach(item -> {
 
-					final var val = hasTens.applyAsLong(item);
-					System.out.println(String.format("%03d - %03d", item, val));
+					hasTens.applyAsLong(item);
+					// System.out.println(String.format("%03d - %03d", item, val));
 					assertThat(0L, equalTo(hasTens.applyAsLong(item)));
 				});
 	}
@@ -72,8 +74,8 @@ class TestsMoneyInWordsTens {
 		Sequence.sequence(20L, 99L, 1)
 				.forEach(item -> {
 
-					final var val = hasTens.applyAsLong(item);
-					System.out.println(String.format("%03d - %03d", item, val));
+					hasTens.applyAsLong(item);
+					// System.out.println(String.format("%03d - %03d", item, val));
 					assertThat(0L, not(equalTo(hasTens.applyAsLong(item))));
 				});
 	}

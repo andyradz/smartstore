@@ -26,13 +26,10 @@ public class Employee
 	private String firstName;
 	private String lastName;
 	private String role;
-	private Double size;
+	private int size;
 
 	@ElementCollection
-	@CollectionTable(
-		name = "employee_phone",
-		joinColumns = @JoinColumn(
-			name = "employee_id"))
+	@CollectionTable(name = "employee_phone", joinColumns = @JoinColumn(name = "employee_id"))
 	private List<Phone> phones;
 
 	public Employee() {
@@ -83,7 +80,7 @@ public class Employee
 	/**
 	 * @return the size
 	 */
-	public Double getSize() {
+	public int getSize() {
 
 		return this.size;
 	}
@@ -91,7 +88,7 @@ public class Employee
 	/**
 	 * @param size the size to set
 	 */
-	public void setSize(final Double size) {
+	public void setSize(final int size) {
 
 		this.size = size;
 	}

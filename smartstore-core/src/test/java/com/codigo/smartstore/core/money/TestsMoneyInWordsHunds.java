@@ -5,11 +5,16 @@ import static org.junit.Assert.assertThat;
 
 import java.util.function.LongUnaryOperator;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.codigo.smartstore.sdk.core.sequence.Sequence;
 
-public class TestsMoneyInWordsHunds {
+/// https://marketplace.eclipse.org/content/snipmatch#group-details
+// https://marketplace.eclipse.org/content/emmet-ex-zen-coding-eclipse-plugin#group-details
+
+@DisplayName("Testy operatory wyznacznia liczby setek z wartości liczby")
+class TestsMoneyInWordsHunds {
 
 	/**
 	 * Oprator wyznacznia setek z wartości liczby
@@ -22,8 +27,8 @@ public class TestsMoneyInWordsHunds {
 		Sequence.sequence(100L, 199L, 1)
 				.forEach(item -> {
 
-					final var val = hasHunds.applyAsLong(item);
-					System.out.println(String.format("%03d - %03d", item, val));
+					hasHunds.applyAsLong(item);
+					// System.out.println(String.format("%03d - %03d", item, val));
 					assertThat(1L, equalTo(hasHunds.applyAsLong(item)));
 				});
 	}
@@ -34,8 +39,8 @@ public class TestsMoneyInWordsHunds {
 		Sequence.sequence(0L, 99L, 1)
 				.forEach(item -> {
 
-					final var val = hasHunds.applyAsLong(item);
-					System.out.println(String.format("%03d - %03d", item, val));
+					hasHunds.applyAsLong(item);
+					// System.out.println(String.format("%03d - %03d", item, val));
 					assertThat(0L, equalTo(hasHunds.applyAsLong(item)));
 				});
 	}

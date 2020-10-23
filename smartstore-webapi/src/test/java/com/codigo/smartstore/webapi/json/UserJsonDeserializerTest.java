@@ -11,8 +11,7 @@ import com.codigo.smartstore.webapi.domain.Employee;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @JsonTest
-@SpringBootTest(
-	webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class UserJsonDeserializerTest {
 
 	@Autowired

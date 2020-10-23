@@ -1,6 +1,5 @@
 package com.codigo.smartstore.webapi.json;
 
-import java.awt.Color;
 import java.io.IOException;
 
 import org.springframework.boot.jackson.JsonComponent;
@@ -11,7 +10,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.TreeNode;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.node.TextNode;
 
 @JsonComponent
 public class UserJsonDeserializer
@@ -24,8 +22,8 @@ public class UserJsonDeserializer
 
 		final TreeNode treeNode = jsonParser.getCodec()
 				.readTree(jsonParser);
-		final TextNode favoriteColor = (TextNode) treeNode.get("favoriteColor");
-		return new Employee();				
+		treeNode.get("favoriteColor");
+		return new Employee();
 	}
 
 	// @Override

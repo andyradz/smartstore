@@ -53,7 +53,7 @@ public class EmailService
 	@Override
 	public void sendSimpleMessageUsingTemplate(final String to, final String subject, final String... templateModel) {
 
-		final String text = String.format(this.template.getText(), templateModel);
+		final String text = String.format("%s %s", this.template.getText(), templateModel);
 		this.sendSimpleMessage(to, subject, text);
 	}
 
@@ -66,8 +66,7 @@ public class EmailService
 			final MimeMessage message = this.emailSender.createMimeMessage();
 			// pass 'true' to the constructor to create a multipart message
 			final MimeMessageHelper helper = new MimeMessageHelper(
-					message,
-					true);
+					message, true);
 
 			helper.setFrom(NOREPLY_ADDRESS);
 			helper.setTo(to);
@@ -91,9 +90,7 @@ public class EmailService
 
 		final MimeMessage message = this.emailSender.createMimeMessage();
 		final MimeMessageHelper helper = new MimeMessageHelper(
-				message,
-				true,
-				"UTF-8");
+				message, true, "UTF-8");
 		helper.setFrom(NOREPLY_ADDRESS);
 		helper.setTo(to);
 		helper.setSubject(subject);

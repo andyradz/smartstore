@@ -6,10 +6,12 @@ import static org.junit.Assert.assertThat;
 
 import java.util.function.LongUnaryOperator;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import com.codigo.smartstore.sdk.core.sequence.Sequence;
 
+@DisplayName("Testy operatory wyznacznia liczby jedności z wartości liczby")
 class TestsMoneyInWordsOnes {
 
 	/**
@@ -20,10 +22,10 @@ class TestsMoneyInWordsOnes {
 	@Test
 	void shouldByTrue_ForOnesUnits() {
 
-		Sequence.sequence(21, 8, 1)
+		Sequence.sequence(21L, 8, 1L)
 				.forEach(item -> {
 
-					System.out.println(item);
+					// System.out.println(item);
 					assertThat(item % 10, equalTo(hasOnes.applyAsLong(item)));
 				});
 	}
@@ -31,10 +33,10 @@ class TestsMoneyInWordsOnes {
 	@Test
 	void shouldByFalse_ForTensUnits() {
 
-		Sequence.sequence(10, 90, 10)
+		Sequence.sequence(10L, 90, 10L)
 				.forEach(item -> {
 
-					System.out.println(item);
+					// System.out.println(item);
 					assertThat(item, not(equalTo(hasOnes.applyAsLong(item))));
 				});
 	}
@@ -42,22 +44,21 @@ class TestsMoneyInWordsOnes {
 	@Test
 	void shouldByFalse_ForTeensUnits() {
 
-		Sequence.sequence(11, 9, 1)
+		Sequence.sequence(11L, 9, 1L)
 				.forEach(item -> {
 
-					System.out.println(item);
+					// System.out.println(item);
 					assertThat(item, not(equalTo(hasOnes.applyAsLong(item))));
 				});
 	}
 
 	@Test
-
 	void shouldByFalse_ForHundsUnits() {
 
-		Sequence.sequence(100, 9, 100)
+		Sequence.sequence(100L, 9, 100L)
 				.forEach(item -> {
 
-					System.out.println(item);
+					// System.out.println(item);
 					assertThat(item, not(equalTo(hasOnes.applyAsLong(item))));
 				});
 	}

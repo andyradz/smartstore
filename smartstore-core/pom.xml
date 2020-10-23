@@ -2,7 +2,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
 	<modelVersion>4.0.0</modelVersion>
+    
 	<parent>
 		<artifactId>smartstore</artifactId>
 		<groupId>com.codigo.smartstore</groupId>
@@ -29,6 +31,11 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
 		</dependency>
 
 		<dependency>
@@ -67,8 +74,7 @@
 	</dependencies>
 
 	<build>
-		<pluginManagement><!-- lock down plugins versions to avoid using Maven defaults 
-				(may be moved to parent pom) -->
+		<pluginManagement>				
 			<plugins>
 				<!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
 				<plugin>
@@ -121,8 +127,7 @@
 					<version>3.1.1</version> <configuration> <configLocation>checkstyle.xml</configLocation> 
 					<encoding>UTF-8</encoding> <consoleOutput>true</consoleOutput> <failsOnError>true</failsOnError> 
 					<linkXRef>false</linkXRef> </configuration> <executions> <execution> <id>validate</id> 
-					<phase>validate</phase> <goals> <goal>check</goal> </goals> </execution> </executions> 
-					</plugin> -->
+					<phase>validate</phase> <goals> <goal>check</goal> </goals> </execution> </executions>			-->
 			</plugins>
 		</pluginManagement>
 	</build>

@@ -1,6 +1,5 @@
 package com.codigo.smartstore.webapi.json;
 
-import java.awt.Color;
 import java.io.IOException;
 
 import org.springframework.boot.jackson.JsonComponent;
@@ -25,11 +24,11 @@ public class UserJsonSerializer
 		jsonGenerator.writeEndObject();
 	}
 
-	private static String getColorAsWebColor(final Color color) {
-
-		final int r = (int) Math.round(color.getRed() * 255.0);
-		final int g = (int) Math.round(color.getGreen() * 255.0);
-		final int b = (int) Math.round(color.getBlue() * 255.0);
-		return String.format("#%02x%02x%02x", r, g, b);
-	}
+	// private static String getColorAsWebColor(final Color color) {
+	//
+	// final int r = (int) Math.round(color.getRed() * 255.0);
+	// final int g = (int) Math.round(color.getGreen() * 255.0);
+	// final int b = (int) Math.round(color.getBlue() * 255.0);
+	// return String.format("#%02x%02x%02x", r, g, b);
+	// }
 }

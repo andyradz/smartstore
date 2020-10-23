@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
-import com.codigo.smartstore.core.ObjectIntrospection;
+import com.codigo.smartstore.core.SerializedIntrospection;
 import com.codigo.smartstore.webapi.domain.Book;
 import com.codigo.smartstore.webapi.domain.Employee;
 import com.codigo.smartstore.webapi.repository.BookRepository;
@@ -38,32 +38,32 @@ class LoadDatabase {
 
 			var dataEntity = new Employee(
 					"Zachariasz", "Zuzu", "1");
-			dataEntity.setSize(ObjectIntrospection.sizeOf(dataEntity));
+			dataEntity.setSize(SerializedIntrospection.sizeOf(dataEntity));
 			repository.save(dataEntity);
 
 			dataEntity = new Employee(
 					"Bilbo Baggins", "burglar", "1");
-			dataEntity.setSize(ObjectIntrospection.sizeOf(dataEntity));
+			dataEntity.setSize(SerializedIntrospection.sizeOf(dataEntity));
 			repository.save(dataEntity);
 
 			dataEntity = new Employee(
 					"Frodo Baggins", "thief", "2");
-			dataEntity.setSize(ObjectIntrospection.sizeOf(dataEntity));
+			dataEntity.setSize(SerializedIntrospection.sizeOf(dataEntity));
 			repository.save(dataEntity);
 
 			dataEntity = new Employee(
 					"Andy", "admin", "3");
-			dataEntity.setSize(ObjectIntrospection.sizeOf(dataEntity));
+			dataEntity.setSize(SerializedIntrospection.sizeOf(dataEntity));
 			repository.save(dataEntity);
 
 			dataEntity = new Employee(
 					"Kate", "secretary", "4");
-			dataEntity.setSize(ObjectIntrospection.sizeOf(dataEntity));
+			dataEntity.setSize(SerializedIntrospection.sizeOf(dataEntity));
 			repository.save(dataEntity);
 
 			dataEntity = new Employee(
 					"Mike", "driver", "5");
-			dataEntity.setSize(ObjectIntrospection.sizeOf(dataEntity));
+			dataEntity.setSize(SerializedIntrospection.sizeOf(dataEntity));
 			repository.save(dataEntity);
 		};
 	}

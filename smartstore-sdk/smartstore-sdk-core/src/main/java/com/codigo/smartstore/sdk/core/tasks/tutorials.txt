@@ -1,0 +1,5 @@
+https://github.com/PacktPublishing/Mastering-Concurrency-Programming-with-Java-9-Second-Edition
+http://skinderowicz.pl/static/pw/programowanie-wspolbiezne-java.html
+http://www.mif.pg.gda.pl/homepages/marcin/PWIR2016_2017/pwir-2.pdf
+https://edu.pjwstk.edu.pl/wyklady/zap/scb/W9/W9.htm
+https://artemis.wszib.edu.pl/~mbargiel/teaching/java/transp/jt.php

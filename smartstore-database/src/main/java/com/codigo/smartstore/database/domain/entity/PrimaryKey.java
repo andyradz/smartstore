@@ -73,8 +73,7 @@ public class PrimaryKey
 
 		final PrimaryKey primaryKey = PrimaryKey.class.cast(instance);
 
-		return(this.keyName.equals(primaryKey) && (this.keyId == primaryKey.keyId)
-				&& this.keyGuid.equals(primaryKey.keyGuid));
+		return((this.keyId == primaryKey.keyId) && this.keyGuid.equals(primaryKey.keyGuid));
 	}
 
 	// -----------------------------------------------------------------------------------------------------------------

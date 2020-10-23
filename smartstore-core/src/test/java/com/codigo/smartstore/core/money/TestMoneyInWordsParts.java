@@ -6,8 +6,10 @@ import static org.junit.Assert.assertThat;
 import java.math.BigDecimal;
 import java.math.MathContext;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("Testy wyznaczania poszczególnych części wartości liczby")
 class TestMoneyInWordsParts {
 
 	@Test
