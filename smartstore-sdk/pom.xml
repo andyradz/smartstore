@@ -39,35 +39,40 @@
 
 		<dependency>
 			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest-library</artifactId>			
+			<artifactId>hamcrest-library</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.javamoney</groupId>
-			<artifactId>moneta</artifactId>		
+			<artifactId>moneta</artifactId>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.eclipse.collections/eclipse-collections -->
 		<dependency>
 			<groupId>org.eclipse.collections</groupId>
 			<artifactId>eclipse-collections</artifactId>
 			<!-- <version>10.4.0</version> -->
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.checkerframework/checker -->
 		<dependency>
 			<groupId>org.checkerframework</groupId>
 			<artifactId>checker</artifactId>
 			<!-- <version>3.7.0</version> -->
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/javax.inject/javax.inject -->
 		<dependency>
 			<groupId>javax.inject</groupId>
 			<artifactId>javax.inject</artifactId>
 			<!-- <version>1</version> -->
 		</dependency>
-		
+
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+
 	</dependencies>
 
 

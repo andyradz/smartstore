@@ -25,7 +25,8 @@
 			<distribution>manual</distribution>
 			<comments>
 				Commercial licensing for use is available upon request.
-				Please contact sales AT www.codigo.com
+				Please
+				contact sales AT www.codigo.com
 			</comments>
 		</license>
 	</licenses>
@@ -91,6 +92,12 @@
 				<groupId>org.junit.jupiter</groupId>
 				<artifactId>junit-jupiter-engine</artifactId>
 				<version>5.5.2</version>
+			</dependency>
+
+			<dependency>
+				<groupId>log4j</groupId>
+				<artifactId>log4j</artifactId>
+				<version>1.2.12</version>
 			</dependency>
 
 		</dependencies>

@@ -46,46 +46,46 @@ public final class Default {
 			String.class, Default.EMPTY);
 
 		DEFAULTS.put(
-			Byte.class, Byte.valueOf(Default.ZERO));
+			Byte.class, Byte.valueOf((byte) 0));
 
 		DEFAULTS.put(
-			byte.class, Default.ZERO);
+			byte.class, (byte) 0);
 
 		DEFAULTS.put(
-			Short.class, Short.valueOf(Default.ZERO));
+			Short.class, Short.valueOf((short) 0));
 
 		DEFAULTS.put(
-			short.class, Default.ZERO);
+			short.class, 0);
 
 		DEFAULTS.put(
-			Integer.class, Integer.valueOf(Default.ZERO));
+			Integer.class, Integer.valueOf(0));
 
 		DEFAULTS.put(
-			int.class, Default.ZERO);
+			int.class, 0);
 
 		DEFAULTS.put(
-			BigInteger.class, BigInteger.valueOf(Default.ZERO));
+			BigInteger.class, BigInteger.valueOf(0));
 
 		DEFAULTS.put(
-			Long.class, Long.valueOf(Default.ZERO));
+			Long.class, Long.valueOf(0));
 
 		DEFAULTS.put(
-			long.class, Default.ZERO);
+			long.class, 0L);
 
 		DEFAULTS.put(
-			Float.class, Float.valueOf(Default.ZERO));
+			Float.class, Float.valueOf(0));
 
 		DEFAULTS.put(
-			float.class, Default.ZERO);
+			float.class, .0);
 
 		DEFAULTS.put(
-			Double.class, Double.valueOf(Default.ZERO));
+			Double.class, Double.valueOf(.0));
 
 		DEFAULTS.put(
-			double.class, Default.ZERO);
+			double.class, .0);
 
 		DEFAULTS.put(
-			BigDecimal.class, BigDecimal.valueOf(Default.ZERO));
+			BigDecimal.class, BigDecimal.valueOf(0));
 
 		DEFAULTS.put(
 			Enum.class, Enum.valueOf(DefaultEnum.class, "ZERO"));
@@ -100,11 +100,6 @@ public final class Default {
 	private enum DefaultEnum {
 		ZERO
 	}
-
-	/**
-	 * Domyślna wartość dla typów numerycznych
-	 */
-	private static final byte ZERO = 0;
 
 	/**
 	 * Domyślna wartość dla typów ciągu znaków
