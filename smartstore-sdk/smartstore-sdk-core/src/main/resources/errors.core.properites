@@ -1,0 +1,2 @@
+core.nullpointerexceptiomessage=Obiekt o identyfikatorze {0} nie posiada swojej instancji w pamięci!
+core.illegalargumentexception=Parametr o identyfikatorze {0} nie spełnia warunków precondiions!

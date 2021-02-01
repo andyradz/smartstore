@@ -1,15 +1,11 @@
 package com.codigo.smartstore.database.domain.catalog;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
@@ -42,8 +38,24 @@ public class Category
 	@Column(name = "Alias", nullable = false, unique = true, length = 20)
 	private String alias;
 
-	@OneToMany(mappedBy = "category")
-	Set<CategoryAttribute> attributes = new HashSet<>();
+	// @OneToMany(mappedBy = "category")
+	// Set<CategoryAttribute> attributes = new HashSet<>();
+
+	/**
+	 * @return the alias
+	 */
+	public String getAlias() {
+
+		return this.alias;
+	}
+
+	/**
+	 * @param alias the alias to set
+	 */
+	public void setAlias(final String alias) {
+
+		this.alias = alias;
+	}
 
 	public String getName() {
 
@@ -53,6 +65,24 @@ public class Category
 	public void setName(final String name) {
 
 		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+
+		return "Category [id=" + this.id
+				+ ", name="
+				+ this.name
+				+ ", alias="
+				+ this.alias
+				+ "]";
+	}
+
+	@Override
+	public Long getId() {
+
+		// TODO Auto-generated method stub
+		return this.id;
 	}
 
 }

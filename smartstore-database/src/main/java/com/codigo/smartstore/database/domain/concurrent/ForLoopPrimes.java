@@ -3,7 +3,11 @@ package com.codigo.smartstore.database.domain.concurrent;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+
 public class ForLoopPrimes {
+
+	private static Logger log = Logger.getLogger(ForLoopPrimes.class);
 
 	public static Set<Integer> findPrimes(final int maxPrimeTry) {
 
@@ -40,8 +44,8 @@ public class ForLoopPrimes {
 
 		s.stream()
 				.sorted()
-				.forEach(System.out::println);
+				.forEach(log::info);
 
-		System.out.println("Time taken: " + timeTaken);
+		log.info("Time taken: " + timeTaken);
 	}
 }

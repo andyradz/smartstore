@@ -7,7 +7,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.MappingException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.enhanced.SequenceStyleGenerator;
-import org.hibernate.internal.util.config.ConfigurationHelper;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.type.LongType;
 import org.hibernate.type.Type;
@@ -58,10 +57,11 @@ public class PublisherCodePrefixedSequenceIdGenerator
 			throws MappingException {
 
 		super.configure(LongType.INSTANCE, params, serviceRegistry);
-		final String codeNumberSeparator = ConfigurationHelper.getString(CODE_NUMBER_SEPARATOR_PARAMETER, params,
-			CODE_NUMBER_SEPARATOR_DEFAULT);
-		final String numberFormat = ConfigurationHelper
-				.getString(NUMBER_FORMAT_PARAMETER, params, NUMBER_FORMAT_DEFAULT)
-				.replace("%", "%2");
+		// final String codeNumberSeparator =
+		// ConfigurationHelper.getString(CODE_NUMBER_SEPARATOR_PARAMETER, params,
+		// CODE_NUMBER_SEPARATOR_DEFAULT);
+		// final String numberFormat = ConfigurationHelper
+		// .getString(NUMBER_FORMAT_PARAMETER, params, NUMBER_FORMAT_DEFAULT)
+		// .replace("%", "%2");
 	}
 }

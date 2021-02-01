@@ -13,16 +13,13 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(
-	name = "Customers")
+@Table(name = "Customers")
 public class Customer {
 
 	public static Customer fromCustomer(final Customer customer) {
 
 		return new Customer(
-				customer.getId(),
-				customer.getTelephone(),
-				customer.getFavorites(),
+				customer.getId(), customer.getTelephone(), customer.getFavorites(),
 				customer.getCommunicationPreferences());
 	}
 

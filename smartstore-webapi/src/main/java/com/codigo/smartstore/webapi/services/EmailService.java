@@ -85,19 +85,20 @@ public class EmailService
 		}
 	}
 
-	private void sendHtmlMessage(final String to, final String subject, final String htmlBody)
-			throws MessagingException {
-
-		final MimeMessage message = this.emailSender.createMimeMessage();
-		final MimeMessageHelper helper = new MimeMessageHelper(
-				message, true, "UTF-8");
-		helper.setFrom(NOREPLY_ADDRESS);
-		helper.setTo(to);
-		helper.setSubject(subject);
-		helper.setText(htmlBody, true);
-		// helper.addInline("attachment.png", this.resourceFile);
-		this.emailSender.send(message);
-	}
+	// private void sendHtmlMessage(final String to, final String subject, final
+	// String htmlBody)
+	// throws MessagingException {
+	//
+	// final MimeMessage message = this.emailSender.createMimeMessage();
+	// final MimeMessageHelper helper = new MimeMessageHelper(
+	// message, true, "UTF-8");
+	// helper.setFrom(NOREPLY_ADDRESS);
+	// helper.setTo(to);
+	// helper.setSubject(subject);
+	// helper.setText(htmlBody, true);
+	// // helper.addInline("attachment.png", this.resourceFile);
+	// this.emailSender.send(message);
+	// }
 
 	@Override
 	public void sendMessageUsingThymeleafTemplate(final String to, final String subject,

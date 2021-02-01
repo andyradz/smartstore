@@ -17,8 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan({
-	"com.codigo.smartstore.webapi" })
+@ComponentScan({ "com.codigo.smartstore.webapi" })
 public class RequestAppConfig
 	implements WebMvcConfigurer {
 
@@ -29,7 +28,7 @@ public class RequestAppConfig
 	public void addInterceptors(final InterceptorRegistry registry) {
 
 		registry.addInterceptor(this.customRequestInterceptor)
-			.addPathPatterns("/**/log-incoming-request/**/");
+				.addPathPatterns("/**/log-incoming-request/**/");
 
 	}
 
@@ -45,8 +44,8 @@ public class RequestAppConfig
 
 		final Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder();
 		builder.indentOutput(true)
-			.dateFormat(new SimpleDateFormat(
-					"dd-MM-yyyy hh:mm"));
+				.dateFormat(new SimpleDateFormat(
+						"dd-MM-yyyy hh:mm"));
 
 	}
 

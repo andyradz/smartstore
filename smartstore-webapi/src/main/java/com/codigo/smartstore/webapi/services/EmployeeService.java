@@ -20,6 +20,11 @@ public class EmployeeService {
 	@Autowired
 	private RestTemplate restTemplate;
 
+	public EmployeeService() throws Exception {
+
+		// new PersistenceJPAConfig().getRepository(this.em1, ZipCode.class);
+	}
+
 	@Bean
 	public RestTemplate restTemplate() {
 
@@ -44,8 +49,8 @@ public class EmployeeService {
 
 		log.info("getEmployeeAddress starts");
 
-		final Employee employeeAddressData = this.restTemplate
-				.getForObject("https://reqres.in/api/users?page=2", Employee.class);
+		final Employee employeeAddressData = this.restTemplate.getForObject("https://reqres.in/api/users?page=2",
+			Employee.class);
 
 		log.info("employeeAddressData, {}", employeeAddressData);
 		Thread.sleep(1000L); // Intentional delay
@@ -58,8 +63,8 @@ public class EmployeeService {
 
 		log.info("getEmployeePhone starts");
 
-		final Employee employeePhoneData = this.restTemplate
-				.getForObject("http://localhost:8080/phone", Employee.class);
+		final Employee employeePhoneData = this.restTemplate.getForObject("http://localhost:8080/phone",
+			Employee.class);
 
 		log.info("employeePhoneData, {}", employeePhoneData);
 		Thread.sleep(1000L); // Intentional delay

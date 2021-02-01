@@ -25,10 +25,10 @@ public class CustomRequestInterceptor
 			final Object handler) {
 
 		final long startTime = Instant.now()
-			.toEpochMilli();
+				.toEpochMilli();
 
 		logger.info("Request URL::" + request.getRequestURL()
-			.toString()
+				.toString()
 				+ ":: Start Time="
 				+ Instant.now());
 
@@ -47,9 +47,9 @@ public class CustomRequestInterceptor
 		final long startTime = Long.class.cast(request.getAttribute("startTime"));
 
 		logger.info("Request URL::" + request.getRequestURL()
-			.toString()
+				.toString()
 				+ ":: Time Taken="
 				+ (Instant.now()
-					.toEpochMilli() - startTime));
+						.toEpochMilli() - startTime));
 	}
 }

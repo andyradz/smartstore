@@ -161,7 +161,7 @@ public enum Gender implements
 					.getLanguage(),
 					Locale.getDefault()
 							.getCountry());
-			bundleStrings = ResourceBundle.getBundle("com.codigo.aplios.allmarks.system.domain.strings.gender", locale);
+			bundleStrings = ResourceBundle.getBundle("com.codigo.smartstore.database.strings.gender", locale);
 		} catch (NullPointerException | MissingResourceException ex) {
 
 			throw ex;

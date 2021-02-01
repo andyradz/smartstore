@@ -9,6 +9,10 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
+	<properties>
+		<org.mapstruct.version>1.4.1.Final</org.mapstruct.version>
+	</properties>
+
 	<organization>
 		<name>Codigo Digital Technology</name>
 		<url>www.codigo.com</url>
@@ -94,14 +98,50 @@
 				<version>5.5.2</version>
 			</dependency>
 
+			<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-params -->
+			<dependency>
+				<groupId>org.junit.jupiter</groupId>
+				<artifactId>junit-jupiter-params</artifactId>
+				<version>5.5.2</version>
+				<scope>test</scope>
+			</dependency>
+
 			<dependency>
 				<groupId>log4j</groupId>
 				<artifactId>log4j</artifactId>
 				<version>1.2.12</version>
 			</dependency>
 
+			<dependency>
+				<groupId>org.mapstruct</groupId>
+				<artifactId>mapstruct</artifactId>
+				<version>${org.mapstruct.version}</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
+	
+	<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+            <configuration>
+                <source>15</source> <!-- depending on your project -->
+                <target>15</target> <!-- depending on your project -->
+                <annotationProcessorPaths>
+                    <path>
+                        <groupId>org.mapstruct</groupId>
+                        <artifactId>mapstruct-processor</artifactId>
+                        <version>${org.mapstruct.version}</version>
+                    </path>
+                    <!-- other annotation processors -->
+                </annotationProcessorPaths>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 
 
 </project>

@@ -13,17 +13,13 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.codigo.smartstore.webapi.domain.Customer;
 import com.codigo.smartstore.webapi.services.CustomerService;
-import com.fasterxml.jackson.databind.ObjectMapper;
-// import com.github.fge.jsonpatch.JsonPatch;
-// import com.github.fge.jsonpatch.JsonPatchException;
 
 @RestController
-@RequestMapping(
-	value = "/customers")
+@RequestMapping(value = "/customers")
 public class CustomerRestController {
 
 	private final CustomerService customerService;
-	private final ObjectMapper objectMapper = new ObjectMapper();
+	// private final ObjectMapper objectMapper = new ObjectMapper();
 
 	@Autowired
 	public CustomerRestController(final CustomerService customerService) {
@@ -31,19 +27,18 @@ public class CustomerRestController {
 		this.customerService = customerService;
 	}
 
-	@PostMapping(
-		consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Customer> createCustomer(@RequestBody final Customer customer) {
 
 		final Customer customerCreated = this.customerService.createCustomer(customer);
 
 		final URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-			.path("/{id}")
-			.buildAndExpand(customerCreated.getId())
-			.toUri();
+				.path("/{id}")
+				.buildAndExpand(customerCreated.getId())
+				.toUri();
 
 		return ResponseEntity.created(location)
-			.build();
+				.build();
 	}
 
 	// @PatchMapping(

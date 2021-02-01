@@ -2,6 +2,9 @@ package com.codigo.smartstore.webapi.services;
 
 import java.util.Random;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class CustomerIdGenerator
 	implements ICustomerIdGenerator {
 

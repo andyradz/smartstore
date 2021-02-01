@@ -94,8 +94,8 @@ public class Parameter
 
 		final int prime = 31;
 		int result = super.hashCode();
-		result = (prime * result) + Objects.hash(this.factual, this.id, this.parameterKey, this.parameters,
-			this.subtype, this.subtypeKey);
+		result = (prime * result) + Objects
+				.hash(this.factual, this.id, this.parameterKey, this.parameters, this.subtype, this.subtypeKey);
 		return result;
 	}
 
@@ -139,6 +139,13 @@ public class Parameter
 				+ ", factual="
 				+ this.factual
 				+ "]";
+	}
+
+	@Override
+	public Long getId() {
+
+		// TODO Auto-generated method stub
+		return this.id;
 	}
 
 }

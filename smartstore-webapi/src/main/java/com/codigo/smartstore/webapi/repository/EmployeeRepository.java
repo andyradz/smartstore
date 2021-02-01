@@ -18,19 +18,19 @@ public interface EmployeeRepository
 	extends PagingAndSortingRepository<Employee, Long> {
 
 	// @RestResource(path = "name", rel="name")
-	@Query("select c from Employee c")
+	@Query("SELECT C FROM EMPLOYEE C")
 	Page<Employee> findAllPage(Pageable pageable);
 
 	// @Query("select c from MovieCharacter c")
 	// Slice<Employee> findAllSlice(Pageable pageable);
 
 	@Override
-	@Query("select c from Employee c")
+	@Query("SELECT C FROM EMPLOYEE C")
 	List<Employee> findAll(Sort sort);
 
 	// @Override
-	@Query("SELECT e FROM Employee e LEFT JOIN FETCH e.phones")
-	List<Employee> findAll1();
+	// @Query("SELECT e FROM Employee e LEFT JOIN FETCH e.phones")
+	// List<Employee> findAll1();
 
 	// Page<Employee> findByMovie(String movieName, Pageable pageable);
 

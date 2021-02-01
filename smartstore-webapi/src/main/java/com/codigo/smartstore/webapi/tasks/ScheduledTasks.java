@@ -14,16 +14,15 @@ public class ScheduledTasks {
 
 	private static final Logger log = LoggerFactory.getLogger(ScheduledTasks.class);
 
-	private static final SimpleDateFormat dateFormat = new SimpleDateFormat(
+	private final SimpleDateFormat dateFormat = new SimpleDateFormat(
 			"HH:mm:ss");
 
-	@Scheduled(
-		fixedRate = 5000)
+	@Scheduled(fixedRate = 5000)
 	@Async("asyncExecutor")
 	public void reportCurrentTime() {
 
 		// https://api.exchangeratesapi.io/latest HTTP/1.1
 
-		log.info("The time is now {}", dateFormat.format(new Date()));
+		log.info("The time is now {}", this.dateFormat.format(new Date()));
 	}
 }

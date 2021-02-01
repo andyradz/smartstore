@@ -67,7 +67,7 @@ public abstract class Domain<PK extends Serializable>
 			return false;
 		if (this.getClass() != obj.getClass())
 			return false;
-		final Domain<PK> other = Domain.class.cast(obj);
+		final Domain<?> other = Domain.class.cast(obj);
 
 		if (this.getId() == null) {
 

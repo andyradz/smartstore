@@ -1,51 +1,44 @@
 package com.codigo.smartstore.webapi.domain;
 
+import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
-
-import com.codigo.smartstore.webapi.generators.StringPrefixedSequenceIdGenerator;
+import com.codigo.smartstore.database.domain.entity.EntityModel;
 
 @Entity
-public class Book {
+@Table(name = "Book")
+public class Book
+		extends
+		EntityModel
+	implements Serializable {
+
+	private static final long serialVersionUID = -6038802999200941194L;
 
 	@Id
-	@GeneratedValue(
-		strategy = GenerationType.SEQUENCE,
-		generator = "book_seq")
-	@GenericGenerator(
-		name = "book_seq",
-		strategy = "com.codigo.smartstore.webapi.generators.StringPrefixedSequenceIdGenerator",
-		parameters = {
-			@Parameter(
-				name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM,
-				value = "50"),
-			@Parameter(
-				name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER,
-				value = "B_"),
-			@Parameter(
-				name = StringPrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAMETER,
-				value = "%05d") })
-	private String id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BOOK_SEQ")
+	@SequenceGenerator(sequenceName = "book_seq", allocationSize = 1, name = "BOOK_SEQ")
+	@Column(name = "id")
+	private Long id;
 
-	/**
-	 * @return the id
-	 */
-	public String getId() {
+	@Column(name = "name", nullable = false)
+	public String name;
 
-		return this.id;
+	public Book() {
+
 	}
 
 	@Override
 	public int hashCode() {
 
-		return Objects.hash(this.id);
+		return Objects.hash(this.id, this.name);
 	}
 
 	@Override
@@ -64,5 +57,11 @@ public class Book {
 
 		return "Book [id=" + this.id
 				+ "]";
+	}
+
+	@Override
+	public Long getId() {
+
+		return this.getId();
 	}
 }

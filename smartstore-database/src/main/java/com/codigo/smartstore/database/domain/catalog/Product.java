@@ -150,4 +150,11 @@ public class Product
 				+ this.price;
 	}
 
+	@Override
+	public Long getId() {
+
+		// TODO Auto-generated method stub
+		return this.id;
+	}
+
 }

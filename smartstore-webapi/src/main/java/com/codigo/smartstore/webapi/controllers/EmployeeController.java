@@ -21,7 +21,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +38,7 @@ import com.codigo.smartstore.webapi.repository.EmployeeRepository;
 import com.codigo.smartstore.webapi.services.EmployeeService;
 
 @RestController
-@Validated
+// @Validated
 public class EmployeeController {
 
 	private static Logger log = LoggerFactory.getLogger(EmployeeController.class);
@@ -54,8 +53,7 @@ public class EmployeeController {
 	public final ResponseEntity<Exception> handleAllExceptions(final RuntimeException ex) {
 
 		return new ResponseEntity<>(
-				ex,
-				HttpStatus.INTERNAL_SERVER_ERROR);
+				ex, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	@GetMapping("${api.endpoint.accounting}" + "/employees/as")
@@ -80,9 +78,7 @@ public class EmployeeController {
 
 	@GetMapping(
 		path = "${api.endpoint.accounting}" + "/employees/sort",
-		produces = {
-			MediaType.APPLICATION_JSON_VALUE,
-			MediaType.APPLICATION_XML_VALUE })
+		produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	@ResponseBody
 	public ResponseEntity<List<Employee>> loadCharactersSorted(final Sort sort) {
 
@@ -96,9 +92,9 @@ public class EmployeeController {
 
 		return ResponseEntity.ok(
 			StreamSupport.stream(
-				this.repository.findAll1()
+				this.repository.findAll()
 						.spliterator(),
-					true)
+				true)
 					.collect(Collectors.toList()));
 	}
 
@@ -113,14 +109,13 @@ public class EmployeeController {
 				StreamSupport.stream(
 					this.repository.findAll()
 							.spliterator(),
-						false)
+					false)
 						.collect(Collectors.toList()),
-				headers,
-				HttpStatus.OK);
+				headers, HttpStatus.OK);
 	}
 
 	@PostMapping("/employees")
-	Employee newEmployee(@RequestBody final Employee employee) {
+	public Employee newEmployee(@RequestBody final Employee employee) {
 
 		return this.repository.save(employee);
 	}
@@ -144,8 +139,7 @@ public class EmployeeController {
 	// Single item
 
 	@GetMapping("${api.endpoint.accounting}" + "/employees/{id}")
-	public ResponseEntity<Employee> one(@PathVariable(
-		required = true) @Min(1) @Max(10) final Long id) {
+	public ResponseEntity<Employee> one(@PathVariable(required = true) @Min(1) @Max(10) final Long id) {
 
 		final var employee = this.repository.findById(id);
 
@@ -169,7 +163,12 @@ public class EmployeeController {
 					employee.setRole(newEmployee.getRole());
 					return this.repository.save(employee);
 				})
-				.orElseGet(() -> { newEmployee.setId(id); return this.repository.save(newEmployee); });
+				.orElseGet((
+				) -> {
+
+					newEmployee.setId(id);
+					return this.repository.save(newEmployee);
+				});
 	}
 
 	@DeleteMapping("${api.endpoint.accounting}" + "/employees/{id}")
@@ -204,7 +203,8 @@ public class EmployeeController {
 		final DeferredResult<ResponseEntity<?>> output = new DeferredResult<>();
 
 		ForkJoinPool.commonPool()
-				.submit(() -> {
+				.submit((
+				) -> {
 
 					try {
 

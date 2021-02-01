@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.inject.Inject;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import com.codigo.smartstore.webapi.domain.Customer;
 public class CustomerService
 	implements ICustomerService {
 
+	@Inject
 	private final ICustomerIdGenerator customerIdGenerator;
 	private final List<Customer> customers = new ArrayList<>();
 

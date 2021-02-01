@@ -11,6 +11,12 @@ class TestMe {
 		new Thread(new Producer(drop)).start();
 		new Thread(new Consumer(drop)).start();
 
+		// final String str1 = new String("s1");// false
+		// final String str2 = new String("s1");// true
+		final String str1 = "s1";// true
+		final String str2 = "s1";// true
+		System.out.println(str1 == str2);
+		System.out.println(str1.equals(str2));
 	}
 }
 

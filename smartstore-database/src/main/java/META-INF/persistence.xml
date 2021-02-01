@@ -1,43 +1,44 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.2"
-    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.2" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 
-	<persistence-unit name="smartstore-database" transaction-type="RESOURCE_LOCAL">
-        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <persistence-unit name="smartstore-database" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>com.codigo.smartstore.database.domain.AdministrativeDivisionType</class>
+        <class>com.codigo.smartstore.database.domain.Parameter</class>
+        <class>com.codigo.smartstore.database.domain.catalog.Category</class>
+        <class>com.codigo.smartstore.database.domain.catalog.Dimension</class>
+        <class>com.codigo.smartstore.database.domain.catalog.Product</class>
+        <class>com.codigo.smartstore.database.domain.entity.EntityCreatedInfo</class>
+        <class>com.codigo.smartstore.database.domain.entity.EntityDate</class>
+        <class>com.codigo.smartstore.database.domain.entity.EntityDeletedInfo</class>
+        <class>com.codigo.smartstore.database.domain.entity.EntityLifeState</class>
+        <class>com.codigo.smartstore.database.domain.entity.EntityModel</class>
+        <class>com.codigo.smartstore.database.domain.entity.EntityPublishedInfo</class>
+        <class>com.codigo.smartstore.database.domain.entity.EntityTime</class>
+        <class>com.codigo.smartstore.database.domain.entity.EntityTimestamp</class>
+        <class>com.codigo.smartstore.database.domain.entity.EntityUpdatedInfo</class>
+        <class>com.codigo.smartstore.database.domain.entity.GuidPrimaryKey</class>
+        <class>com.codigo.smartstore.database.domain.entity.Identity</class>
+        <class>com.codigo.smartstore.database.domain.entity.IdentityPrimaryKey</class>
+        <class>com.codigo.smartstore.database.domain.entity.ManagedEntityModel</class>
+        <class>com.codigo.smartstore.database.domain.entity.MutableEntity</class>
+        <class>com.codigo.smartstore.database.domain.entity.PrimaryKey</class>
+        <class>com.codigo.smartstore.database.domain.entity.RecordInfo</class>
+        <class>com.codigo.smartstore.database.domain.evidence.CreditCard</class>
+        <class>com.codigo.smartstore.database.domain.location.ZipCode</class>
+        <class>com.codigo.smartstore.database.domain.order.Order</class>
+        <class>com.codigo.smartstore.database.domain.order.OrderVersion</class>
+        <class>com.codigo.smartstore.database.domain.order.VersionHistory</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
-                
-		<class>com.codigo.smartstore.database.domain.AdministrativeDivisionType</class>
-		<class>com.codigo.smartstore.database.domain.Parameter</class>
-		<class>com.codigo.smartstore.database.domain.catalog.Category</class>
-		<class>com.codigo.smartstore.database.domain.catalog.CategoryAttribute</class>
-		<class>com.codigo.smartstore.database.domain.catalog.Dimension</class>
-		<class>com.codigo.smartstore.database.domain.catalog.Product</class>
-		<class>com.codigo.smartstore.database.domain.common.LogicalStates</class>
-		<class>com.codigo.smartstore.database.domain.entity.EntityCreatedInfo</class>
-		<class>com.codigo.smartstore.database.domain.entity.EntityDate</class>
-		<class>com.codigo.smartstore.database.domain.entity.EntityDeletedInfo</class>
-		<class>com.codigo.smartstore.database.domain.entity.EntityLifeState</class>
-		<class>com.codigo.smartstore.database.domain.entity.EntityModel</class>
-		<class>com.codigo.smartstore.database.domain.entity.EntityPublishedInfo</class>
-		<class>com.codigo.smartstore.database.domain.entity.EntityTime</class>
-		<class>com.codigo.smartstore.database.domain.entity.EntityTimestamp</class>
-		<class>com.codigo.smartstore.database.domain.entity.EntityUpdatedInfo</class>
-		<class>com.codigo.smartstore.database.domain.entity.GuidPrimaryKey</class>
-		<class>com.codigo.smartstore.database.domain.entity.Identity</class>
-		<class>com.codigo.smartstore.database.domain.entity.IdentityPrimaryKey</class>
-		<class>com.codigo.smartstore.database.domain.entity.ManagedEntityModel</class>
-		<class>com.codigo.smartstore.database.domain.entity.MutableEntity</class>
-		<class>com.codigo.smartstore.database.domain.entity.PrimaryKey</class>
-		<class>com.codigo.smartstore.database.domain.entity.RecordInfo</class>
-		<class>com.codigo.smartstore.database.domain.evidence.CreditCard</class>
-		<class>com.codigo.smartstore.database.domain.order.Order</class>
-		<class>com.codigo.smartstore.database.domain.order.OrderVersion</class>
-		<class>com.codigo.smartstore.database.domain.order.VersionHistory</class>
-		
-		<properties>		     
-            <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://HWD19Y2\MSSQL;port=64182;databaseName=smartstore"/>            
-        </properties>
-	</persistence-unit>
+        <properties>
+            <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true" />
+            <property name="format_sql" value="true" />
+            <property name="use_sql_comments" value="true" />
+        </properties>    
+
+    </persistence-unit>
+
 </persistence>

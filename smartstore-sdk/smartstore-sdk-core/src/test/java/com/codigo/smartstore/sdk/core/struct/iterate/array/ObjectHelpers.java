@@ -7,13 +7,6 @@ import java.util.Objects;
 
 public class ObjectHelpers {
 
-	public static void main(final String[] args) {
-
-		final String str = "sdadadasd";
-
-		ObjectHelpers.sizeOf(str);
-	}
-
 	public static long sizeOf(final Object object) {
 
 		return InstrumentationAgent.getObjectSize(object);
@@ -23,10 +16,11 @@ public class ObjectHelpers {
 
 		private static volatile Instrumentation globalInstrumentation;
 
-		public static void premain(final String agentArgs, final Instrumentation inst) {
-
-			globalInstrumentation = inst;
-		}
+		// public static void premain(final String agentArgs, final Instrumentation
+		// inst) {
+		//
+		// globalInstrumentation = inst;
+		// }
 
 		public static long getObjectSize(final Object object) {
 

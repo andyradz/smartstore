@@ -1,19 +1,23 @@
 package com.codigo.smartstore.webapi.domain;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import com.codigo.smartstore.database.domain.entity.EntityModel;
 
 // @Data
 @Entity
+@Table(name = "Employee")
 public class Employee
+		extends
+		EntityModel
 	implements Serializable {
 
 	/**
@@ -21,16 +25,20 @@ public class Employee
 	 */
 	private static final long serialVersionUID = -110335657004177699L;
 
-	private @Id @GeneratedValue Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EMP_SEQ")
+	@SequenceGenerator(sequenceName = "employee_seq", allocationSize = 1, name = "EMP_SEQ")
+	private long id;
 
 	private String firstName;
 	private String lastName;
 	private String role;
 	private int size;
 
-	@ElementCollection
-	@CollectionTable(name = "employee_phone", joinColumns = @JoinColumn(name = "employee_id"))
-	private List<Phone> phones;
+	// @ElementCollection
+	// @CollectionTable(name = "employee_phone", joinColumns = @JoinColumn(name =
+	// "employee_id"))
+	// private List<Phone> phones;
 
 	public Employee() {
 
@@ -43,6 +51,7 @@ public class Employee
 		this.role = role;
 	}
 
+	@Override
 	public Long getId() {
 
 		return this.id;
@@ -96,7 +105,7 @@ public class Employee
 	@Override
 	public int hashCode() {
 
-		return Objects.hash(this.firstName, this.id, this.lastName, this.phones, this.role, this.size);
+		return Objects.hash(this.firstName, this.id, this.lastName, this.role, this.size);
 	}
 
 	@Override
@@ -112,7 +121,7 @@ public class Employee
 
 		return Objects.equals(this.firstName, other.firstName) && Objects.equals(this.id, other.id)
 				&& Objects.equals(this.lastName, other.lastName)
-				&& Objects.equals(this.phones, other.phones)
+				// && Objects.equals(this.phones, other.phones)
 				&& Objects.equals(this.role, other.role)
 				&& Objects.equals(this.size, other.size);
 	}
@@ -130,7 +139,7 @@ public class Employee
 				+ ", size="
 				+ this.size
 				+ ", phones="
-				+ this.phones
+				// + this.phones
 				+ "]";
 	}
 

@@ -10,9 +10,9 @@ import com.codigo.smartstore.webapi.domain.Book;
 
 @Repository
 public interface BookRepository
-	extends PagingAndSortingRepository<Book, String> {
+	extends PagingAndSortingRepository<Book, Long> {
 
-	@Query("select b from Book b")
+	@Query("SELECT B FROM BOOK B")
 	Page<Book> findAllPage(Pageable pageable);
 
 }

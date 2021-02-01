@@ -3,13 +3,9 @@ package com.codigo.smartstore.database.domain.entity;
 import java.io.Serializable;
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.TableGenerator;
 
 import org.eclipse.persistence.annotations.Customizer;
 
@@ -30,20 +26,22 @@ public abstract class EntityModel
 
 	private static final long serialVersionUID = -6333759041613153418L;
 
-	@Column(name = "Id")
-	@GeneratedValue(strategy = GenerationType.TABLE, generator = "entity_generator")
-	@TableGenerator(name = "entity_generator", allocationSize = 50, initialValue = 0)
-	protected Long id;
-
-	public Long getId() {
-
-		return this.id;
-	}
+	// @Column(name = "Id")
+	// @GeneratedValue(strategy = GenerationType.TABLE, generator =
+	// "entity_generator")
+	// @TableGenerator(name = "entity_generator", allocationSize = 50, initialValue
+	// = 0)
+	// protected Long id;
+	//
+	public abstract Long getId();
+	//
+	// return 1L;
+	// }
 
 	@Override
 	public int hashCode() {
 
-		return Objects.hash(this.id);
+		return Objects.hash(1);
 	}
 
 	@Override
@@ -58,15 +56,14 @@ public abstract class EntityModel
 		if (!(obj instanceof EntityModel))
 			return false;
 
-		final EntityModel other = EntityModel.class.cast(obj);
+		EntityModel.class.cast(obj);
 
-		return Objects.equals(this.id, other.id);
+		return Objects.equals(1, 1);
 	}
 
 	@Override
 	public String toString() {
 
-		return "EntityModel [id=" + this.id
-				+ "]";
+		return "EntityModel";
 	}
 }
