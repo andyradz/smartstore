@@ -6,26 +6,27 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.PagingAndSortingRepository;
-// import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.stereotype.Repository;
 
 import com.codigo.smartstore.webapi.domain.Employee;
 
 @Repository
-// @NoRepositoryBean
+@NoRepositoryBean
 public interface EmployeeRepository
 	extends PagingAndSortingRepository<Employee, Long> {
 
 	// @RestResource(path = "name", rel="name")
-	@Query("SELECT C FROM EMPLOYEE C")
-	Page<Employee> findAllPage(Pageable pageable);
+	@Override
+	@Query("select e from employees e")
+	Page<Employee> findAll(Pageable pageable);
 
 	// @Query("select c from MovieCharacter c")
 	// Slice<Employee> findAllSlice(Pageable pageable);
 
 	@Override
-	@Query("SELECT C FROM EMPLOYEE C")
+	@Query("select e from employees e")
 	List<Employee> findAll(Sort sort);
 
 	// @Override

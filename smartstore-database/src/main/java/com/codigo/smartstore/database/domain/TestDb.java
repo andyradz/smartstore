@@ -5,11 +5,15 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import org.apache.log4j.Logger;
+
 import com.codigo.smartstore.database.domain.catalog.Category;
-import com.codigo.smartstore.database.domain.location.IZipCode;
-import com.codigo.smartstore.database.domain.location.ZipCode;
+import com.codigo.smartstore.database.domain.catalog.CategoryAttribute;
+import com.codigo.smartstore.database.domain.catalog.MediaFile;
 
 public class TestDb {
+
+	private static final Logger log = Logger.getLogger(TestDb.class);
 
 	public static void main(final String[] args) {
 
@@ -22,44 +26,75 @@ public class TestDb {
 			final EntityTransaction tx = em.getTransaction();
 
 			tx.begin();
-			Category cat = new Category();
-			cat.setName("wqew");
-			cat.setAlias("koko");
+
+			final var q1 = em.createQuery("DELETE FROM MediaFile");
+			final var q2 = em.createQuery("DELETE FROM CategoryAttribute");
+			final var q3 = em.createQuery("DELETE FROM Category");
+
+			q1.executeUpdate();
+			q2.executeUpdate();
+			q3.executeUpdate();
+
+			final Category cat = new Category();
+			cat.setName("Produkty spożywcze9");
+			cat.setAlias("PS");
+
+			final var ca = new CategoryAttribute();
+			ca.setName("Kodowanie9");
+			ca.setSearchable(false);
+			ca.setValue("Masakra9");
+			ca.setCategory(cat);
+			cat.getAttributes()
+					.add(ca);
+
+			final var file = new MediaFile();
+			file.setName("cv.ar9");
+			file.setCategory(cat);
+			cat.getFiles()
+					.add(file);
+
 			em.persist(cat);
 
-			cat = new Category();
-			cat.setName("wqewr");
-			cat.setAlias("kok");
-			em.persist(cat);
+			// cat = new Category();
+			// cat.setName("Produkty elektryczne");
+			// cat.setAlias("PE");
+			// em.persist(cat);
 
-			final IZipCode zip = new ZipCode();
-			zip.setCity("Poznań");
-			zip.setDistrict("Karczenki");
-			zip.setLatitude(1212121);
-			zip.setLongitude(23);
-			zip.setProvince("komorniki");
-			zip.setStreet("Bydgoska");
-			zip.setTownShip("Zachód");
-			zip.setZip("03126");
-			em.persist(zip);
+			// final IZipCode zip = new ZipCode();
+			// zip.setCity("Poznań");
+			// zip.setDistrict("Karczenki");
+			// zip.setLatitude(Double.MAX_VALUE);
+			// zip.setLongitude(Double.MIN_VALUE);
+			// zip.setProvince("Mława");
+			// zip.setStreet("Aleje Waszyngtona");
+			// zip.setTownShip("Północny");
+			// zip.setZip("06061");
+
+			// em.persist(zip);
 
 			tx.commit();
 
-			var category = em.find(Category.class, 1L);
-			System.out.println(category);
+			final var category = em.find(Category.class, cat.getId());
+			log.info(category);
 
-			category = em.find(Category.class, 2L);
-			System.out.println(category);
+			// category = em.find(Category.class, 2L);
+			// log.info(category);
+			//
+			// category = em.find(Category.class, 3L);
+			// log.info(category);
+			//
+			// final IZipCode z1 = em.find(ZipCode.class, 1L);
+			// log.info(z1);
 
-			category = em.find(Category.class, 3L);
-			System.out.println(category);
-
-			final IZipCode z1 = em.find(ZipCode.class, 1L);
-			System.out.println(z1);
+			// em.remove(category);
+			if (em.isOpen())
+				em.close();
 
 		} catch (final Exception e) {
 
 			e.printStackTrace();
+		} finally {
+
 		}
 
 	}

@@ -12,9 +12,8 @@ import javax.persistence.Table;
 
 import com.codigo.smartstore.database.domain.entity.EntityModel;
 
-// @Data
 @Entity
-@Table(name = "Employee")
+@Table(name = "Employees")
 public class Employee
 		extends
 		EntityModel
@@ -28,7 +27,7 @@ public class Employee
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EMP_SEQ")
 	@SequenceGenerator(sequenceName = "employee_seq", allocationSize = 1, name = "EMP_SEQ")
-	private long id;
+	private Long id;
 
 	private String firstName;
 	private String lastName;

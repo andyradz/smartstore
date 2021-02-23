@@ -1,40 +1,26 @@
 package com.codigo.smartstore.webapi.controllers;
 
-import java.net.URI;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
+import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.codigo.smartstore.webapi.domain.Employee;
-import com.codigo.smartstore.webapi.repository.EmployeeRepository;
 import com.codigo.smartstore.webapi.services.EmployeeService;
 
 @RestController
@@ -43,10 +29,7 @@ public class EmployeeController {
 
 	private static Logger log = LoggerFactory.getLogger(EmployeeController.class);
 
-	@Autowired
-	private EmployeeRepository repository;
-
-	@Autowired
+	@Inject
 	private EmployeeService service;
 
 	@ExceptionHandler(RuntimeException.class)
@@ -76,106 +59,109 @@ public class EmployeeController {
 		// log.info("EmployeePhone--> " + employeePhone.get());
 	}
 
-	@GetMapping(
-		path = "${api.endpoint.accounting}" + "/employees/sort",
-		produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
+	// @GetMapping(
+	// path = "${api.endpoint.accounting}" + "/employees/sort",
+	// produces = { MediaType.APPLICATION_JSON_VALUE,
+	// MediaType.APPLICATION_XML_VALUE })
+	// @ResponseBody
+	// public ResponseEntity<List<Employee>> loadCharactersSorted(final Sort sort) {
+	//
+	// return ResponseEntity.ok()
+	// .body(this.repository.findAll(sort));
+	// }
+	//
+
+	@GetMapping(path = "${api.endpoint.accounting}" + "/employees", produces = { MediaType.APPLICATION_JSON_VALUE })
+	// MediaType.APPLICATION_XML_VALUE )
 	@ResponseBody
-	public ResponseEntity<List<Employee>> loadCharactersSorted(final Sort sort) {
+	public ResponseEntity<List<Employee>> all() throws Exception {
 
-		return ResponseEntity.ok()
-				.body(this.repository.findAll(sort));
-	}
-
-	@GetMapping("${api.endpoint.accounting}" + "/employees")
-	@ResponseBody
-	public ResponseEntity<List<Employee>> all() {
-
+		// this.service.findEmployee();
 		return ResponseEntity.ok(
-			StreamSupport.stream(
-				this.repository.findAll()
-						.spliterator(),
-				true)
-					.collect(Collectors.toList()));
+			List.of(new Employee("Andrzej", "Połaniecki", "Admin"), new Employee("Andrzej1", "Połaniecki1", "Admin1")));
 	}
-
-	@GetMapping("${api.endpoint.accounting}" + "/employee")
-	@ResponseBody
-	public ResponseEntity<List<Employee>> customHeader() {
-
-		final HttpHeaders headers = new HttpHeaders();
-		headers.add("Custom-Header", "employee");
-
-		return new ResponseEntity<>(
-				StreamSupport.stream(
-					this.repository.findAll()
-							.spliterator(),
-					false)
-						.collect(Collectors.toList()),
-				headers, HttpStatus.OK);
-	}
-
-	@PostMapping("/employees")
-	public Employee newEmployee(@RequestBody final Employee employee) {
-
-		return this.repository.save(employee);
-	}
-
-	@PostMapping("${api.endpoint.accounting}" + "/employees")
-	public ResponseEntity<Employee> newEmployee1(@RequestBody final Employee newEmployee) {
-		// location header
-		// HTTP 201 status code
-
-		final var entity = this.repository.save(newEmployee);
-
-		final URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-				.path("/{id}")
-				.buildAndExpand(entity.getId())
-				.toUri();
-
-		return ResponseEntity.created(location)
-				.build();
-	}
-
-	// Single item
-
-	@GetMapping("${api.endpoint.accounting}" + "/employees/{id}")
-	public ResponseEntity<Employee> one(@PathVariable(required = true) @Min(1) @Max(10) final Long id) {
-
-		final var employee = this.repository.findById(id);
-
-		if (employee.isEmpty())
-
-			return ResponseEntity.noContent()
-					.build();
-		// employee.orElseGet(Employee::new);
-
-		else
-			return ResponseEntity.ok(employee.get());
-	}
-
-	@PutMapping("${api.endpoint.accounting}" + "/employees/{id}")
-	public Employee updateEmployee(@RequestBody final Employee newEmployee, @PathVariable final Long id) {
-
-		return this.repository.findById(id)
-				.map(employee -> {
-
-					employee.setName(newEmployee.getName());
-					employee.setRole(newEmployee.getRole());
-					return this.repository.save(employee);
-				})
-				.orElseGet((
-				) -> {
-
-					newEmployee.setId(id);
-					return this.repository.save(newEmployee);
-				});
-	}
-
-	@DeleteMapping("${api.endpoint.accounting}" + "/employees/{id}")
-	public void deleteEmployee(@PathVariable final Long id) {
-
-		this.repository.deleteById(id);
-	}
+	//
+	// @GetMapping("${api.endpoint.accounting}" + "/employee")
+	// @ResponseBody
+	// public ResponseEntity<List<Employee>> customHeader() {
+	//
+	// final HttpHeaders headers = new HttpHeaders();
+	// headers.add("Custom-Header", "employee");
+	//
+	// return new ResponseEntity<>(
+	// StreamSupport.stream(
+	// this.repository.findAll()
+	// .spliterator(),
+	// false)
+	// .collect(Collectors.toList()),
+	// headers, HttpStatus.OK);
+	// }
+	//
+	// @PostMapping("/employees")
+	// public Employee newEmployee(@RequestBody final Employee employee) {
+	//
+	// return this.repository.save(employee);
+	// }
+	//
+	// @PostMapping("${api.endpoint.accounting}" + "/employees")
+	// public ResponseEntity<Employee> newEmployee1(@RequestBody final Employee
+	// newEmployee) {
+	// // location header
+	// // HTTP 201 status code
+	//
+	// final var entity = this.repository.save(newEmployee);
+	//
+	// final URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+	// .path("/{id}")
+	// .buildAndExpand(entity.getId())
+	// .toUri();
+	//
+	// return ResponseEntity.created(location)
+	// .build();
+	// }
+	//
+	// // Single item
+	//
+	// @GetMapping("${api.endpoint.accounting}" + "/employees/{id}")
+	// public ResponseEntity<Employee> one(@PathVariable(required = true) @Min(1)
+	// @Max(10) final Long id) {
+	//
+	// final var employee = this.repository.findById(id);
+	//
+	// if (employee.isEmpty())
+	//
+	// return ResponseEntity.noContent()
+	// .build();
+	// // employee.orElseGet(Employee::new);
+	//
+	// else
+	// return ResponseEntity.ok(employee.get());
+	// }
+	//
+	// @PutMapping("${api.endpoint.accounting}" + "/employees/{id}")
+	// public Employee updateEmployee(@RequestBody final Employee newEmployee,
+	// @PathVariable final Long id) {
+	//
+	// return this.repository.findById(id)
+	// .map(employee -> {
+	//
+	// employee.setName(newEmployee.getName());
+	// employee.setRole(newEmployee.getRole());
+	// return this.repository.save(employee);
+	// })
+	// .orElseGet((
+	// ) -> {
+	//
+	// newEmployee.setId(id);
+	// return this.repository.save(newEmployee);
+	// });
+	// }
+	//
+	// @DeleteMapping("${api.endpoint.accounting}" + "/employees/{id}")
+	// public void deleteEmployee(@PathVariable final Long id) {
+	//
+	// this.repository.deleteById(id);
+	// }
 
 	// @RequestMapping(value = "/callable", method = RequestMethod.GET)
 	// public Callable<ResponseEntity<?>> timeCallable() {

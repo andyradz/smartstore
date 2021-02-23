@@ -5,7 +5,9 @@
         <class>com.codigo.smartstore.database.domain.AdministrativeDivisionType</class>
         <class>com.codigo.smartstore.database.domain.Parameter</class>
         <class>com.codigo.smartstore.database.domain.catalog.Category</class>
+        <class>com.codigo.smartstore.database.domain.catalog.CategoryAttribute</class>
         <class>com.codigo.smartstore.database.domain.catalog.Dimension</class>
+        <class>com.codigo.smartstore.database.domain.catalog.MediaFile</class>
         <class>com.codigo.smartstore.database.domain.catalog.Product</class>
         <class>com.codigo.smartstore.database.domain.entity.EntityCreatedInfo</class>
         <class>com.codigo.smartstore.database.domain.entity.EntityDate</class>
@@ -31,7 +33,7 @@
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:test" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:file:C:\Apps\db\master;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="true" />

@@ -31,10 +31,6 @@ public class Book
 	@Column(name = "name", nullable = false)
 	public String name;
 
-	public Book() {
-
-	}
-
 	@Override
 	public int hashCode() {
 

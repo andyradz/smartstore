@@ -26,17 +26,7 @@ public abstract class EntityModel
 
 	private static final long serialVersionUID = -6333759041613153418L;
 
-	// @Column(name = "Id")
-	// @GeneratedValue(strategy = GenerationType.TABLE, generator =
-	// "entity_generator")
-	// @TableGenerator(name = "entity_generator", allocationSize = 50, initialValue
-	// = 0)
-	// protected Long id;
-	//
 	public abstract Long getId();
-	//
-	// return 1L;
-	// }
 
 	@Override
 	public int hashCode() {

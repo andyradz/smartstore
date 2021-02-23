@@ -90,8 +90,16 @@
 
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-jcl</artifactId>
+			<artifactId>spring-jcl</artifactId>			
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-test -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.assertj</groupId>
@@ -110,17 +118,17 @@
 			<artifactId>smartstore-core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		
+
 		<dependency>
-            <groupId>com.codigo.smartstore</groupId>
-            <artifactId>smartstore-database</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+			<groupId>com.codigo.smartstore</groupId>
+			<artifactId>smartstore-database</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 
 		<dependency>
 			<groupId>javax.inject</groupId>
-			<artifactId>javax.inject</artifactId>	
-			<version>1</version>	
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
 		</dependency>
 
 		<dependency>
@@ -133,7 +141,7 @@
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>mssql-jdbc</artifactId>
 			<version>9.1.1.jre15-preview</version>
-		</dependency>			
+		</dependency>
 
 	</dependencies>
 

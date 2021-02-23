@@ -1,4 +1,4 @@
-package com.codigo.smartstore.webapi;
+package com.codigo.smartstore.webapi.configuration;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -14,6 +14,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import com.codigo.smartstore.webapi.CustomRequestInterceptor;
 
 @Configuration
 @EnableWebMvc

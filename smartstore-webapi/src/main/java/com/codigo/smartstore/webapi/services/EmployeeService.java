@@ -1,15 +1,20 @@
 package com.codigo.smartstore.webapi.services;
 
+import java.util.Iterator;
 import java.util.concurrent.CompletableFuture;
+
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.codigo.smartstore.database.repository.GenericRepository;
 import com.codigo.smartstore.webapi.domain.Employee;
 
 @Service
@@ -17,18 +22,35 @@ public class EmployeeService {
 
 	private static Logger log = LoggerFactory.getLogger(EmployeeService.class);
 
-	@Autowired
+	@PersistenceContext
+	private EntityManager entityManager;
+
+	@Inject
 	private RestTemplate restTemplate;
 
+	@Inject
 	public EmployeeService() throws Exception {
 
-		// new PersistenceJPAConfig().getRepository(this.em1, ZipCode.class);
 	}
 
 	@Bean
 	public RestTemplate restTemplate() {
 
 		return new RestTemplate();
+	}
+
+	@Bean
+	public GenericRepository<Employee> genericRepository() throws Exception {
+
+		return new GenericRepository<>(this.entityManager, Employee.class, "smartstore-database");
+	}
+
+	// @Transactional
+	public Iterator<Employee> findEmployee() throws Exception {
+
+		return this.genericRepository()
+				.selectAll();
+
 	}
 
 	@Async("asyncExecutor")

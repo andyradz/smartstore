@@ -4,7 +4,19 @@ import java.util.Random;
 
 class TestMe {
 
+	private void testArray(int[] array) {
+
+		array = new int[] { 8, 9, 0 };
+
+		for (int i = 0; i < array.length; i++)
+			array[i] = 0;
+
+	}
+
 	public static void main(final String[] args) {
+
+		final int arr[] = new int[] { 1, 3, 4 };
+		new TestMe().testArray(arr);
 
 		final var drop = new Drop();
 
@@ -86,7 +98,7 @@ class Producer
 
 		final String importantInfo[] = {
 			"Mares eat oats", "Does eat oats", "Little lambs eat ivy", "A kid will eat ivy too", "232323", "13123",
-			"123123" };
+			"kolos", "migos", "123123", "papos" };
 		final Random random = new Random();
 
 		for (final String element : importantInfo) {
