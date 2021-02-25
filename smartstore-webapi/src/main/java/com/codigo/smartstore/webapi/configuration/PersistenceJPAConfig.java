@@ -46,9 +46,9 @@ public class PersistenceJPAConfig {
 	public DataSource dataSource() {
 
 		final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-		dataSource.setUrl(
-			"jdbc:sqlserver://;serverName=HWD19Y2\\MSSQL;port=64182;databaseName=smartstore;authenticationScheme=JavaKerberos");
+		// //dataSource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		// //dataSource.setUrl(
+		// "jdbc:sqlserver://;serverName=HWD19Y2\\MSSQL;port=64182;databaseName=smartstore;authenticationScheme=JavaKerberos");
 		// integratedSecurity=true;domain=KDPW
 		// dataSource.setUsername("");
 		// dataSource.setPassword("");

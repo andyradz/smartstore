@@ -12,6 +12,8 @@ import javax.persistence.Table;
 
 import com.codigo.smartstore.database.domain.entity.EntityModel;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 @Table(name = "Employees")
 public class Employee
@@ -29,7 +31,10 @@ public class Employee
 	@SequenceGenerator(sequenceName = "employee_seq", allocationSize = 1, name = "EMP_SEQ")
 	private Long id;
 
+	@ApiModelProperty(name = "firstName", required = true, value = "??", notes = "employee first name")
 	private String firstName;
+
+	@ApiModelProperty(name = "lastName", required = true, value = "??", notes = "employee last name")
 	private String lastName;
 	private String role;
 	private int size;

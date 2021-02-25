@@ -1,44 +1,34 @@
 package com.codigo.smartstore.webapi.controllers;
 
-import java.net.URI;
-
-import javax.inject.Inject;
-
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import com.codigo.smartstore.webapi.domain.Customer;
-import com.codigo.smartstore.webapi.services.CustomerService;
 
 @RestController
 @RequestMapping(value = "/customers")
 public class CustomerRestController {
 
-	private final CustomerService customerService;
-
-	@Inject
-	public CustomerRestController(final CustomerService customerService) {
-
-		this.customerService = customerService;
-	}
-
-	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Customer> createCustomer(@RequestBody final Customer customer) {
-
-		final Customer customerCreated = this.customerService.createCustomer(customer);
-		final URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-				.path("/{id}")
-				.buildAndExpand(customerCreated.getId())
-				.toUri();
-
-		return ResponseEntity.created(location)
-				.build();
-	}
+	// private final CustomerService customerService;
+	//
+	// @Inject
+	// public CustomerRestController(final CustomerService customerService) {
+	//
+	// this.customerService = customerService;
+	// }
+	//
+	// @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+	// public ResponseEntity<Customer> createCustomer(@RequestBody final Customer
+	// customer) {
+	//
+	// final Customer customerCreated =
+	// this.customerService.createCustomer(customer);
+	// final URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+	// .path("/{id}")
+	// .buildAndExpand(customerCreated.getId())
+	// .toUri();
+	//
+	// return ResponseEntity.created(location)
+	// .build();
+	// }
 
 	// @Inject
 	// private EntityLinks links;

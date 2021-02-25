@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,8 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
@@ -23,7 +26,15 @@ import org.springframework.web.context.request.async.DeferredResult;
 import com.codigo.smartstore.webapi.domain.Employee;
 import com.codigo.smartstore.webapi.services.EmployeeService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
+@RequestMapping("${api.endpoint.accounting}")
+@Api(value = "${api.endpoint.accounting}", description = "managing of employees")
 // @Validated
 public class EmployeeController {
 
@@ -39,7 +50,7 @@ public class EmployeeController {
 				ex, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-	@GetMapping("${api.endpoint.accounting}" + "/employees/as")
+	@GetMapping("/employees/as")
 	public void testAsynch() throws InterruptedException, ExecutionException {
 
 		log.info("testAsynch Start");
@@ -71,31 +82,37 @@ public class EmployeeController {
 	// }
 	//
 
-	@GetMapping(path = "${api.endpoint.accounting}" + "/employees", produces = { MediaType.APPLICATION_JSON_VALUE })
-	// MediaType.APPLICATION_XML_VALUE )
+	@ApiOperation(value = "Fetch all employees", notes = "provide full list about employees", response = List.class)
+	@ApiResponses(
+		value = {
+			@ApiResponse(code = 200, message = "Successfully retrieved list", response = Employee.class),
+			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
+			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
+			@ApiResponse(code = 500, message = "Failure") })
+	@GetMapping(path = "/employees", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_PDF_VALUE })
 	@ResponseBody
 	public ResponseEntity<List<Employee>> all() throws Exception {
 
-		// this.service.findEmployee();
 		return ResponseEntity.ok(
-			List.of(new Employee("Andrzej", "Połaniecki", "Admin"), new Employee("Andrzej1", "Połaniecki1", "Admin1")));
+			List.of(new Employee("Andrzej", "Połaniecki", "Admin"),
+				new Employee("Andrzej1", "Połaniecki1", "Admin1"),
+				new Employee("Izabela", "Radziszewska", "Moderator"),
+				new Employee("Aleksandra", "Radziszewska", "Student"),
+				new Employee("Bartosz", "Kawecki", "Poseł")
+			));
 	}
-	//
-	// @GetMapping("${api.endpoint.accounting}" + "/employee")
-	// @ResponseBody
-	// public ResponseEntity<List<Employee>> customHeader() {
-	//
-	// final HttpHeaders headers = new HttpHeaders();
-	// headers.add("Custom-Header", "employee");
-	//
-	// return new ResponseEntity<>(
-	// StreamSupport.stream(
-	// this.repository.findAll()
-	// .spliterator(),
-	// false)
-	// .collect(Collectors.toList()),
-	// headers, HttpStatus.OK);
-	// }
+
+	@GetMapping(path = "/employees/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
+	@ResponseBody
+	public ResponseEntity<Employee> findById(
+			@ApiParam(value = "unique id of employee", example = "123") @PathVariable final int id) {
+
+		final HttpHeaders headers = new HttpHeaders();
+		headers.add("Custom-Header", "employee");
+
+		return new ResponseEntity<>(new Employee("Andrzej", "Połaniecki", "Admin"), HttpStatus.OK);
+	}
 	//
 	// @PostMapping("/employees")
 	// public Employee newEmployee(@RequestBody final Employee employee) {

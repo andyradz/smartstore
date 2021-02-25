@@ -62,11 +62,19 @@ class AggregateFunctionsIntegrationTest {
 	@Test
 	void whenMaxAge_ThenReturnValue() {
 
-		final Long val = (Long) session.createQuery("SELECT count(*) from MediaFile")
-				.getSingleResult();
+		final Long val = (Long) session
+				.createQuery("select count(1) as r from com.codigo.smartstore.database.domain.catalog.Category")
+				.uniqueResult();
+
+		// Criteria crit=session.createCriteria(BiMembres.class);
+		// crit.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
+		// crit.add(Restrictions.eq("login", this.login));
+		// ... OTHER Criterias if any..
+		// //set the count projection
+		// crit.setProjection(Projections.rowCount())
+		// Long rowsCount = (Long)crit.uniqueResult();
 
 		assertThat(1, equalTo(val));
-		System.out.println("test" + val);
 	}
 
 	// final int maxAge = (int) session.createQuery("SELECT MAX(age) from Student")
