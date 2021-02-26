@@ -48,10 +48,11 @@ public class Employee
 
 	}
 
-	public Employee(final String firstName, final String lastName, final String role) {
+	public Employee(final Long id, final String firstName, final String lastName, final String role) {
 
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.id = id;
 		this.role = role;
 	}
 

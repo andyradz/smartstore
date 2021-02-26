@@ -3,9 +3,11 @@ package com.codigo.smartstore.webapi.controllers;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ForkJoinPool;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,17 +15,23 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
 
 import com.codigo.smartstore.webapi.domain.Employee;
+import com.codigo.smartstore.webapi.dto.EmployeeAdd;
 import com.codigo.smartstore.webapi.services.EmployeeService;
 
 import io.swagger.annotations.Api;
@@ -32,13 +40,21 @@ import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+// https://www.baeldung.com/spring-mvc-custom-validator
+
 @RestController
 @RequestMapping("${api.endpoint.accounting}")
-@Api(value = "${api.endpoint.accounting}", description = "managing of employees")
-// @Validated
+@Api(value = "${api.endpoint.accounting}")
+@Validated
 public class EmployeeController {
 
 	private static Logger log = LoggerFactory.getLogger(EmployeeController.class);
+
+	private final List<Employee> data = List.of(new Employee(1L, "Andrzej", "Połaniecki", "Admin"),
+		new Employee(2L, "Andrzej1", "Połaniecki1", "Admin1"),
+		new Employee(3L, "Izabela", "Radziszewska", "Moderator"),
+		new Employee(4L, "Aleksandra", "Radziszewska", "Student"),
+		new Employee(5L, "Bartosz", "Kawecki", "Poseł"));
 
 	@Inject
 	private EmployeeService service;
@@ -70,121 +86,76 @@ public class EmployeeController {
 		// log.info("EmployeePhone--> " + employeePhone.get());
 	}
 
-	// @GetMapping(
-	// path = "${api.endpoint.accounting}" + "/employees/sort",
-	// produces = { MediaType.APPLICATION_JSON_VALUE,
-	// MediaType.APPLICATION_XML_VALUE })
-	// @ResponseBody
-	// public ResponseEntity<List<Employee>> loadCharactersSorted(final Sort sort) {
-	//
-	// return ResponseEntity.ok()
-	// .body(this.repository.findAll(sort));
-	// }
-	//
-
-	@ApiOperation(value = "Fetch all employees", notes = "provide full list about employees", response = List.class)
+	@ApiOperation(
+		value = "Fetch all employees",
+		notes = "provide full list about employees test",
+		response = List.class)
 	@ApiResponses(
 		value = {
-			@ApiResponse(code = 200, message = "Successfully retrieved list", response = Employee.class),
+			@ApiResponse(code = 200, message = "Successfully retrieved list extra", response = Employee.class),
 			@ApiResponse(code = 401, message = "You are not authorized to view the resource"),
 			@ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
 			@ApiResponse(code = 404, message = "The resource you were trying to reach is not found"),
-			@ApiResponse(code = 500, message = "Failure") })
+			@ApiResponse(code = 500, message = "Internal Server Error") })
 	@GetMapping(path = "/employees", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_PDF_VALUE })
 	@ResponseBody
-	public ResponseEntity<List<Employee>> all() throws Exception {
+	public ResponseEntity<List<Employee>> fetchAllEmployees() throws Exception {
 
 		return ResponseEntity.ok(
-			List.of(new Employee("Andrzej", "Połaniecki", "Admin"),
-				new Employee("Andrzej1", "Połaniecki1", "Admin1"),
-				new Employee("Izabela", "Radziszewska", "Moderator"),
-				new Employee("Aleksandra", "Radziszewska", "Student"),
-				new Employee("Bartosz", "Kawecki", "Poseł")
-			));
+			this.data
+		);
 	}
 
-	@GetMapping(path = "/employees/{id}", produces = { MediaType.APPLICATION_JSON_VALUE })
+	@GetMapping(path = "/employees/{employeeId}", produces = { MediaType.APPLICATION_JSON_VALUE })
 	@ResponseBody
-	public ResponseEntity<Employee> findById(
-			@ApiParam(value = "unique id of employee", example = "123") @PathVariable final int id) {
+	public ResponseEntity<Employee> fetchEmployeeById(@ApiParam(
+		value = "unique id of employee",
+		example = "123") @PathVariable("id") @Min(1) @Max(Long.MAX_VALUE) final Long employeeId) {
+
+		final var employeeOptional = this.data.stream()
+				.filter(employee -> employeeId.equals(employee.getId()))
+				.findFirst();
+
+		if (employeeOptional.isEmpty())
+			return ResponseEntity.notFound()
+					.build();
 
 		final HttpHeaders headers = new HttpHeaders();
 		headers.add("Custom-Header", "employee");
 
-		return new ResponseEntity<>(new Employee("Andrzej", "Połaniecki", "Admin"), HttpStatus.OK);
+		return ResponseEntity.ok(employeeOptional.get());
 	}
-	//
-	// @PostMapping("/employees")
-	// public Employee newEmployee(@RequestBody final Employee employee) {
-	//
-	// return this.repository.save(employee);
-	// }
-	//
-	// @PostMapping("${api.endpoint.accounting}" + "/employees")
-	// public ResponseEntity<Employee> newEmployee1(@RequestBody final Employee
-	// newEmployee) {
-	// // location header
-	// // HTTP 201 status code
-	//
-	// final var entity = this.repository.save(newEmployee);
-	//
-	// final URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-	// .path("/{id}")
-	// .buildAndExpand(entity.getId())
-	// .toUri();
-	//
-	// return ResponseEntity.created(location)
-	// .build();
-	// }
-	//
-	// // Single item
-	//
-	// @GetMapping("${api.endpoint.accounting}" + "/employees/{id}")
-	// public ResponseEntity<Employee> one(@PathVariable(required = true) @Min(1)
-	// @Max(10) final Long id) {
-	//
-	// final var employee = this.repository.findById(id);
-	//
-	// if (employee.isEmpty())
-	//
-	// return ResponseEntity.noContent()
-	// .build();
-	// // employee.orElseGet(Employee::new);
-	//
-	// else
-	// return ResponseEntity.ok(employee.get());
-	// }
-	//
-	// @PutMapping("${api.endpoint.accounting}" + "/employees/{id}")
-	// public Employee updateEmployee(@RequestBody final Employee newEmployee,
-	// @PathVariable final Long id) {
-	//
-	// return this.repository.findById(id)
-	// .map(employee -> {
-	//
-	// employee.setName(newEmployee.getName());
-	// employee.setRole(newEmployee.getRole());
-	// return this.repository.save(employee);
-	// })
-	// .orElseGet((
-	// ) -> {
-	//
-	// newEmployee.setId(id);
-	// return this.repository.save(newEmployee);
-	// });
-	// }
-	//
-	// @DeleteMapping("${api.endpoint.accounting}" + "/employees/{id}")
-	// public void deleteEmployee(@PathVariable final Long id) {
-	//
-	// this.repository.deleteById(id);
-	// }
 
-	// @RequestMapping(value = "/callable", method = RequestMethod.GET)
-	// public Callable<ResponseEntity<?>> timeCallable() {
-	// // log.info("Callable time request");
-	// return () -> ResponseEntity.ok(Instant.now());
-	// }
+	@PostMapping("/employees")
+	public ResponseEntity<Long> insertEmployee(
+			@RequestBody @Valid @ModelAttribute("employee") final EmployeeAdd employee, final BindingResult result,
+			final Model model) {
+
+		if (result.hasErrors())
+			return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
+					.build();
+
+		model.addAttribute("name", employee.getFirstName());
+		model.addAttribute("lastName", employee.getLastName());
+
+		return ResponseEntity.ok()
+				.build();
+	}
+
+	@DeleteMapping("/employees/{employeeId}")
+	public ResponseEntity<Long> deleteEmployee(@PathVariable @Min(1) @Max(Long.MAX_VALUE) final Long employeeId) {
+
+		final var employeeOptional = this.data.stream()
+				.filter(employee -> employeeId.equals(employee.getId()))
+				.findFirst();
+
+		return employeeOptional.isEmpty()
+				? ResponseEntity.notFound()
+						.build()
+					: ResponseEntity.ok()
+							.build();
+	}
+
 	//
 	// @RequestMapping(value = "/deferred", method = RequestMethod.GET)
 	// public DeferredResult<ResponseEntity<?>> timeDeferred() {
@@ -200,71 +171,25 @@ public class EmployeeController {
 	//
 
 	@GetMapping("${api.endpoint.accounting}" + "/employees/async")
-	@Async
-	public DeferredResult<ResponseEntity<?>> handleReqDefResult(final Model model) {
+	@ResponseBody
+	// @Async
+	public DeferredResult<String> handleReqDefResult(final Model model) {
 
-		final DeferredResult<ResponseEntity<?>> output = new DeferredResult<>();
+		final DeferredResult<String> deferredResult = new DeferredResult<>();
 
-		ForkJoinPool.commonPool()
-				.submit((
-				) -> {
+		new Thread((
+		) -> {
 
-					try {
+			try {
 
-						Thread.sleep(6000);
-					} catch (final InterruptedException e) {
+				Thread.sleep(2000);
+			} catch (final InterruptedException e) {
 
-					}
-					output.setResult(ResponseEntity.ok("ok"));
-				});
-		return output;
+				e.printStackTrace();
+			}
+			deferredResult.setResult("test async result");
+		}).start();
+
+		return deferredResult;
 	}
 }
-
-//// Step 1 - Without any options provided
-// @RequestMapping(value="/{id}", method=RequestMethod.GET)
-// public @ResponseBody Spittle spittleById(@PathVariable long id) {
-// return spittleRepository.findOne(id);
-// }
-//
-//// Step 2- We need to handle exception scenarios, as step 1 only caters happy
-//// path.
-// @ExceptionHandler(SpittleNotFoundException.class)
-// @ResponseStatus(HttpStatus.NOT_FOUND)
-// public Error spittleNotFound(SpittleNotFoundException e) {
-// long spittleId = e.getSpittleId();
-// return new Error(4, "Spittle [" + spittleId + "] not found");
-// }
-//
-//// Step 3 - Now we will alter the service method, **if you want to provide
-//// location**
-// @RequestMapping(
-// method=RequestMethod.POST
-// consumes="application/json")
-// public ResponseEntity<Spittle> saveSpittle(
-// @RequestBody Spittle spittle,
-// UriComponentsBuilder ucb) {
-//
-// Spittle spittle = spittleRepository.save(spittle);
-// HttpHeaders headers = new HttpHeaders();
-// URI locationUri =
-// ucb.path("/spittles/")
-// .path(String.valueOf(spittle.getId()))
-// .build()
-// .toUri();
-// headers.setLocation(locationUri);
-// ResponseEntity<Spittle> responseEntity =
-// new ResponseEntity<Spittle>(
-// spittle, headers, HttpStatus.CREATED)
-// return responseEntity;
-// }
-//
-//// Step4 - If you are not interested to provide the url location, you can omit
-//// ResponseEntity and go with
-// @RequestMapping(
-// method=RequestMethod.POST
-// consumes="application/json")
-// @ResponseStatus(HttpStatus.CREATED)
-// public Spittle saveSpittle(@RequestBody Spittle spittle) {
-// return spittleRepository.save(spittle);
-// }

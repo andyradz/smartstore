@@ -2,8 +2,12 @@ package com.codigo.smartstore.webapi.configuration;
 
 import java.util.Collections;
 
+import org.springframework.boot.web.embedded.jetty.JettyServletWebServerFactory;
+import org.springframework.boot.web.server.ErrorPage;
+import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 
@@ -62,6 +66,20 @@ public class SwaggerConfig
 
 		registry.addResourceHandler("/webjars/**")
 				.addResourceLocations("classpath:/META-INF/resources/webjars/");
+	}
+
+	@Bean
+	public ConfigurableServletWebServerFactory webServerFactory() {
+
+		final JettyServletWebServerFactory factory = new JettyServletWebServerFactory();
+		factory.setPort(9000);
+		factory.setContextPath("/smartstore");
+		factory.addErrorPages(new ErrorPage(HttpStatus.NOT_FOUND, "/notfound.html"));
+		factory.setAcceptors(2);
+		factory.setPort(8081);
+		factory.setSelectors(2);
+		factory.setDisplayName("smartstore");
+		return factory;
 	}
 
 }

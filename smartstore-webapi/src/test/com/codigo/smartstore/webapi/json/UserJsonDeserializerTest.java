@@ -1,3 +1,4 @@
+package com.codigo.smartstore.webapi.json;
 // package com.codigo.smartstore.webapi.json;
 //
 // import java.io.IOException;

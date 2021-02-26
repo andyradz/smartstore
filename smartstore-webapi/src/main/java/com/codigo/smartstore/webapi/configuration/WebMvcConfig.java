@@ -20,7 +20,6 @@ import org.springframework.web.util.UrlPathHelper;
 
 @Configuration
 @ComponentScan(basePackages = "org.springframework.samples.mvc")
-
 @EnableWebMvc
 @EnableScheduling
 public class WebMvcConfig
@@ -77,6 +76,29 @@ public class WebMvcConfig
 		configurer.setDefaultTimeout(3000);
 		configurer.registerCallableInterceptors(new TimeoutCallableProcessingInterceptor());
 	}
+
+	// @Bean
+	// public FilterRegistrationBean<RequestResponseLoggingFilter> loggingFilter() {
+	//
+	// final FilterRegistrationBean<RequestResponseLoggingFilter> registrationBean =
+	// new FilterRegistrationBean<>();
+	//
+	// registrationBean.setFilter(new RequestResponseLoggingFilter());
+	// registrationBean.addUrlPatterns("/users/*");
+	//
+	// return registrationBean;
+	// }
+
+	// @Bean()
+	// public ConfigurableServletWebServerFactory
+	// jettyEmbeddedServletContainerFactory() {
+	//
+	// final JettyServletWebServerFactory jettyContainer = new
+	// JettyServletWebServerFactory();
+	// jettyContainer.setPort(9000);
+	// jettyContainer.setContextPath("/smartstore");
+	// return jettyContainer;
+	// }
 
 	// @Bean
 	// public MultipartResolver multipartResolver() {

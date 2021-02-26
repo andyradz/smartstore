@@ -1,3 +1,4 @@
+package com.codigo.smartstore.webapi;
 // package com.codigo.smartstore.webapi;
 //
 // import org.junit.Before;

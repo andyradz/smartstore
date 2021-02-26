@@ -1,3 +1,4 @@
+package com.codigo.smartstore.webapi;
 // package java.com.codigo.smartstore.webapi;
 //
 // import static org.mockito.BDDMockito.given;
