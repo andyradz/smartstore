@@ -118,17 +118,6 @@ public class Category
 	}
 
 	@Override
-	public String toString() {
-
-		return "Category [id=" + this.id
-				+ ", name="
-				+ this.name
-				+ ", alias="
-				+ this.alias
-				+ "]";
-	}
-
-	@Override
 	public Long getId() {
 
 		return this.id;
@@ -137,5 +126,34 @@ public class Category
 	public Set<CategoryAttribute> getAttributes() {
 
 		return this.attributes;
+	}
+
+	@Override
+	public String toString() {
+
+		return "Category [id=" + this.id
+				+ ", name="
+				+ this.name
+				+ ", fullName="
+				+ this.fullName
+				+ ", externalLink="
+				+ this.externalLink
+				+ ", bottomDescription="
+				+ this.bottomDescription
+				+ ", description="
+				+ this.description
+				+ ", metaKeywords="
+				+ this.metaKeywords
+				+ ", metaTitle="
+				+ this.metaTitle
+				+ ", pageSizeOptions="
+				+ this.pageSizeOptions
+				+ ", alias="
+				+ this.alias
+				+ ", attributes="
+				+ this.attributes
+				+ ", files="
+				+ this.files
+				+ "]";
 	}
 }

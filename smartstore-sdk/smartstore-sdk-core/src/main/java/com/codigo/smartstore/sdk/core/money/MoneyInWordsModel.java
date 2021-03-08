@@ -138,6 +138,8 @@ public final class MoneyInWordsModel
 		};
 
 		System.out.println(func.apply(1_452_114L));
+		System.out.println(func.apply(1_200_500L));
+		System.out.println(func.apply(19_500L));
 
 	}
 

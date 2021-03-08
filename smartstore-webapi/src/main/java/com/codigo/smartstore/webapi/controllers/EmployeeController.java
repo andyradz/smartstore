@@ -1,10 +1,7 @@
 package com.codigo.smartstore.webapi.controllers;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
-import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -32,7 +29,6 @@ import org.springframework.web.context.request.async.DeferredResult;
 
 import com.codigo.smartstore.webapi.domain.Employee;
 import com.codigo.smartstore.webapi.dto.EmployeeAdd;
-import com.codigo.smartstore.webapi.services.EmployeeService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -56,34 +52,14 @@ public class EmployeeController {
 		new Employee(4L, "Aleksandra", "Radziszewska", "Student"),
 		new Employee(5L, "Bartosz", "Kawecki", "Poseł"));
 
-	@Inject
-	private EmployeeService service;
+	// @Inject
+	// private EmployeeService service;
 
 	@ExceptionHandler(RuntimeException.class)
 	public final ResponseEntity<Exception> handleAllExceptions(final RuntimeException ex) {
 
 		return new ResponseEntity<>(
 				ex, HttpStatus.INTERNAL_SERVER_ERROR);
-	}
-
-	@GetMapping("/employees/as")
-	public void testAsynch() throws InterruptedException, ExecutionException {
-
-		log.info("testAsynch Start");
-
-		final CompletableFuture<Employee> employeeAddress = this.service.getEmployeeAddress();
-		// final CompletableFuture<Employee> employeeName =
-		// this.service.getEmployeeName();
-		// final CompletableFuture<Employee> employeePhone =
-		// this.service.getEmployeePhone();
-
-		// Wait until they are all doneS
-		CompletableFuture.allOf(employeeAddress)
-				.join();
-
-		log.info("EmployeeAddress--> " + employeeAddress.get());
-		// log.info("EmployeeName--> " + employeeName.get());
-		// log.info("EmployeePhone--> " + employeePhone.get());
 	}
 
 	@ApiOperation(
@@ -110,7 +86,7 @@ public class EmployeeController {
 	@ResponseBody
 	public ResponseEntity<Employee> fetchEmployeeById(@ApiParam(
 		value = "unique id of employee",
-		example = "123") @PathVariable("id") @Min(1) @Max(Long.MAX_VALUE) final Long employeeId) {
+		example = "123") @PathVariable("employeeId") @Min(1) @Max(Long.MAX_VALUE) final Long employeeId) {
 
 		final var employeeOptional = this.data.stream()
 				.filter(employee -> employeeId.equals(employee.getId()))
@@ -155,20 +131,6 @@ public class EmployeeController {
 					: ResponseEntity.ok()
 							.build();
 	}
-
-	//
-	// @RequestMapping(value = "/deferred", method = RequestMethod.GET)
-	// public DeferredResult<ResponseEntity<?>> timeDeferred() {
-	// // log.info("Deferred time request");
-	// DeferredResult<ResponseEntity<?>> result = new DeferredResult<>();
-	//
-	// new Thread(() -> {
-	// result.setResult(ResponseEntity.ok(Instant.now()));
-	// }, "MyThread-").start();
-	//
-	// return result;
-	// }
-	//
 
 	@GetMapping("${api.endpoint.accounting}" + "/employees/async")
 	@ResponseBody

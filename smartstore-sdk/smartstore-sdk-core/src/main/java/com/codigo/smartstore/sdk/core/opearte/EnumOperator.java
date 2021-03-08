@@ -5,6 +5,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.codigo.smartstore.sdk.core.constans.Default;
+
 /**
  * Klasa zawiera metody pomocnicze do obsługi dowolnego typu wyliczeniowego.
  * Realizuje najczęściej potrzebne operacje wykonywane na dowolnym typie
@@ -135,7 +137,7 @@ public final class EnumOperator {
 				.reduce((
 						a, b
 				) -> a)
-				.orElse("");
+				.orElse(Default.zero(String.class));
 	}
 
 	/**
@@ -152,7 +154,7 @@ public final class EnumOperator {
 				.reduce((
 						a, b
 				) -> b)
-				.orElse("");
+				.orElse(Default.zero(String.class));
 	}
 
 	/**
@@ -202,7 +204,7 @@ public final class EnumOperator {
 				.map(dd)
 				.filter(item -> item.equalsIgnoreCase(name))
 				.findAny()
-				.orElse("");
+				.orElse(Default.zero(String.class));
 	}
 
 	/**

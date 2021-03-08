@@ -118,7 +118,7 @@
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-test -->
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>			
+			<artifactId>spring-test</artifactId>
 			<!-- <scope>test</scope> -->
 		</dependency>
 
@@ -162,9 +162,17 @@
 			<!-- <version>9.1.1.jre15-preview</version> -->
 		</dependency>
 
+		<dependency>
+			<groupId>io.quarkus</groupId>
+			<artifactId>quarkus-config-yaml</artifactId>
+			<version>1.9.2.Final</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
+        <finalName>smartstore-webapi</finalName>
+        <defaultGoal>package</defaultGoal>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>

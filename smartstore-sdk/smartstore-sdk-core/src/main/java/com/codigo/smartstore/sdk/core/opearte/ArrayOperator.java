@@ -85,6 +85,8 @@ public final class ArrayOperator {
 		if (isNull(array))
 			throw getNullPointerExceptioMessage(array);
 
+		// TODO: dodać preconditional do weryfikacji parametru dimenssion
+
 		final long count = stream(array[dimension]).count();
 
 		if (count <= zero(Long.class))
@@ -106,6 +108,7 @@ public final class ArrayOperator {
 		if (isNull(array))
 			throw getNullPointerExceptioMessage(array);
 
+		// w przypadku braku elementów w tablicy zwraca wartość -1
 		return array.length - 1L;
 	}
 

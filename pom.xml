@@ -13,8 +13,8 @@
 	</properties>
 
 	<organization>
-		<name>Codigo Digital Technology</name>
-		<url>www.codigo.com</url>
+		<name>codigo digital technology</name>
+		<url>www.codigo.com</url>		
 	</organization>
 
 	<licenses>
@@ -35,8 +35,11 @@
 	</licenses>
 
 	<developers>
-		<!-- <developer> <id>torodb.8kdata.com</id> <name>ToroDB Project Contributors</name> <email>torodb@8kdata.com</email> <url>https://github.com/torodb/torodb</url> 
-			<organization>The ToroDB Project</organization> <organizationUrl>http://torodb.com</organizationUrl> </developer> -->
+	   <developer>
+        <id>and.radz</id>
+        <name>andrzej radziszewski</name>
+        <email>and.radz@wp.pl</email>
+       </developer>      	
 	</developers>
 
 	<modules>
@@ -115,10 +118,16 @@
 				<version>${org.mapstruct.version}</version>
 			</dependency>
 
+			<dependency>
+				<groupId>io.quarkus</groupId>
+				<artifactId>quarkus-config-yaml</artifactId>
+				<version>1.9.2.Final</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
-	<build>
+	<build>	   
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -140,7 +149,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.0.0-M5</version>				
+				<version>3.0.0-M5</version>
 				<configuration>
 					<useSystemClassLoader>false</useSystemClassLoader>
 				</configuration>

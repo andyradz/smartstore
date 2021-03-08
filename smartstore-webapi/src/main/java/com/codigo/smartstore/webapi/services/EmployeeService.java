@@ -93,4 +93,9 @@ public class EmployeeService {
 		log.info("employeePhoneData completed");
 		return CompletableFuture.completedFuture(employeePhoneData);
 	}
+
+	public String testService() {
+
+		return "Ok";
+	}
 }

@@ -13,16 +13,16 @@
 
 	<artifactId>smartstore-core</artifactId>
 
-
 	<name>smartstore-core</name>
 	<!-- FIXME change it to the project's website -->
 	<url>http://www.example.com</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.finalName>smartstore-core</project.build.finalName>
 		<java.version>15</java.version>
 		<maven.compiler.source>15</maven.compiler.source>
-		<maven.compiler.target>15</maven.compiler.target>
+		<maven.compiler.target>15</maven.compiler.target>        
 	</properties>
 
 	<dependencies>
@@ -80,6 +80,8 @@
 	</dependencies>
 
 	<build>
+    <defaultGoal>package</defaultGoal>
+    <finalName>${project.build.finalName}</finalName>
 		<pluginManagement>
 			<plugins>
 				<!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->

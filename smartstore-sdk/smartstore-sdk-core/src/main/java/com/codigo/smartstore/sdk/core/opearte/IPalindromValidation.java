@@ -1,14 +1,22 @@
-package com.codigo.smartstore.core;
+package com.codigo.smartstore.sdk.core.opearte;
 
 import java.util.Objects;
 
 /**
- * Weryfikacja wyrażenia typu palindromu
+ * Operator weryfikacja wyrażenia typu palindromu
  * @author andrzej.radziszewski
- * @since 2021 // TODO: dodac opcje przetwazania tylko samuch znaków alfabetu
+ * @since 2021
+ * @category operator
  */
-public interface PalindromValidation {
+public interface IPalindromValidation {
 
+	/**
+	 * Weryfikacja ciągu znaków w konkekście występowania wyrażenia typu palindrom
+	 *
+	 * @param palindrom Ciąg znaków
+	 * @return Wartość logiczna TRUE - obiekt jest palindromem, wartość FALSE -
+	 * obiekt nie jest palindromem
+	 */
 	default boolean validate(final String palindrom) {
 
 		if (Objects.isNull(palindrom))

@@ -1,7 +1,10 @@
 package com.codigo.smartstore.sdk.core.sequence;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.stream.DoubleStream;
 import java.util.stream.LongStream;
+import java.util.stream.Stream;
 
 /**
  * Klasa reprezentuje mechanizm generowanie sekwencji dla wybranych typów
@@ -101,9 +104,35 @@ public class Sequence {
 	}
 
 	/**
+	 * Metoda generuje strumień dat ze wskazanego zakresu
+	 *
+	 * @param startDate Data początku zakresu generowania
+	 * @param endDate Data końca zakresu generowania
+	 * @param step Wartość przesunięcia między bieżącą datą a kolejną data
+	 * @return Strumień zakresu dat
+	 */
+	public static Stream<LocalDate> sequence(final LocalDate startDate, final LocalDate endDate, final int step) {
+
+		return startDate.datesUntil(endDate, Period.ofDays(step));
+	}
+
+	/**
+	 * @param startDate startDate Data początku zakresu generowania
+	 * @param step Wartość przesunięcia między bieżącą datą a kolejną data
+	 * @param limit Ilość kroków do wykonania
+	 * @return Strumień zakresu dat
+	 */
+	public static Stream<LocalDate> sequence(final LocalDate startDate, final int step, final long limit) {
+
+		return Stream.iterate(startDate, date -> startDate.plusDays(step))
+				.limit(limit);
+	}
+
+	/**
 	 * Podstawowy konstruktor obiektu <code>Sequence</code>
 	 */
 	private Sequence() {
 
+		super();
 	}
 }

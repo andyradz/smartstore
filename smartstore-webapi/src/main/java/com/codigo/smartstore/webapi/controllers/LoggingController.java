@@ -13,12 +13,12 @@ public class LoggingController {
  
     @RequestMapping("/")
     public String index() {
-        logger.trace("A TRACE Message");
-        logger.debug("A DEBUG Message");
-        logger.info("An INFO Message");
-        logger.warn("A WARN Message");
-        logger.error("An ERROR Message");
+        logger.trace("a trace message logging");
+        logger.debug("a debug message logging");
+        logger.info("an info message logging");
+        logger.warn("a warn message logging");
+        logger.error("an error message logging");
  
-        return "Howdy! Check out the Logs to see the output...";
+        return "Witaj! zaraz wystartuje twoja aplikacja E_PENSUM";
     }
 }

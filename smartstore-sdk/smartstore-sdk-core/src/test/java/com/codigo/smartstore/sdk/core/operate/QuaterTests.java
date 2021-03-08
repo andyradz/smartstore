@@ -1,4 +1,4 @@
-package com.codigo.smartstore.core.money;
+package com.codigo.smartstore.sdk.core.operate;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.not;
@@ -14,6 +14,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
+
+import com.codigo.smartstore.sdk.core.sequence.Sequence;
 
 @DisplayName("Testy wyznaczania kwartału z liczby całkowitej")
 class QuaterTests {
@@ -114,21 +116,13 @@ class QuaterTests {
 	 */
 	private static Stream<Arguments> provideQuater1Dates() {
 
-		return Stream.of(
-			Arguments.of(LocalDate.of(2021, 1, 1)),
-			Arguments.of(LocalDate.now()
-					.plusDays(1)),
-			Arguments.of(LocalDate.now()
-					.plusDays(2)),
-			Arguments.of(LocalDate.now()
-					.plusDays(3)),
-			Arguments.of(LocalDate.now()
-					.plusDays(4)),
-			Arguments.of(LocalDate.now()
-					.plusDays(5)),
-			Arguments.of(LocalDate.now()
-					.plusDays(37))
-		);
-	}
+		final var startDate = LocalDate.of(2021, 1, 1);
+		final var endDate = startDate.plusMonths(2L);
 
+		final var arrayDates = Sequence.sequence(startDate, endDate, 1)
+				.toArray();
+
+		return Stream.of(arrayDates)
+				.map(Arguments::of);
+	}
 }

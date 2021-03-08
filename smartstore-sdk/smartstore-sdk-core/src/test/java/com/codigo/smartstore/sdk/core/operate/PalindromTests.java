@@ -1,17 +1,16 @@
-package com.codigo.smartstore.core.money;
+package com.codigo.smartstore.sdk.core.operate;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.util.Objects;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import com.codigo.smartstore.core.PalindromValidation;
+import com.codigo.smartstore.sdk.core.opearte.IPalindromValidation;
+import com.codigo.smartstore.sdk.core.opearte.RecursivePalindrom;
 
 @DisplayName(value = "Testy wyrażenia typu palindrom")
 class PalindromTests {
@@ -26,13 +25,11 @@ class PalindromTests {
 
 		final var palindromText = input;
 
-		final var validator = new PalindromValidation() {};
+		final var validator = new RecursivePalindrom();
 
 		final var isPalindrom = validator.validate(palindromText);
 
 		assertThat(true, equalTo(isPalindrom));
-
-		assertThat(true, equalTo(Recursivepalindrom.check(input)));
 	}
 
 	@Test
@@ -40,7 +37,7 @@ class PalindromTests {
 
 		final var palindromText = "";
 
-		final var validator = new PalindromValidation() {};
+		final var validator = new IPalindromValidation() {};
 
 		final var isPalindrom = validator.validate(palindromText);
 
@@ -52,7 +49,7 @@ class PalindromTests {
 
 		final var palindromText = "caz";
 
-		final var validator = new PalindromValidation() {};
+		final var validator = new IPalindromValidation() {};
 
 		final var isPalindrom = validator.validate(palindromText);
 
@@ -62,7 +59,7 @@ class PalindromTests {
 	@Test
 	void testPalindrom_IsNullExceptionValid() {
 
-		final var validator = new PalindromValidation() {};
+		final var validator = new IPalindromValidation() {};
 
 		assertThrows(NullPointerException.class,
 			(
@@ -73,38 +70,49 @@ class PalindromTests {
 
 		);
 	}
+
+	@Test
+	void test() {
+
+		final Kontrwarancja<Organism> AnimalK = instance -> System.out.println(instance);
+		final Kontrwarancja<Animal[]> CatK = instance -> System.out.println(instance);
+
+		CatK.set(new Animal[] {});
+		CatK.set(new Cat[] {});
+		// CatK.set(new Organism());
+
+		AnimalK.set(new Animal());
+		AnimalK.set(new Cat());
+		AnimalK.set(new Organism());
+
+		final String str1 = new String("11");
+		final String str2 = new String("1");
+
+		var comp = str1.equals(str2);
+		comp = str1 == str2;
+		System.out.println(comp);
+	}
 }
 
-class Recursivepalindrom {
+interface Kowarancja<T> {
 
-	static boolean check(final String palindrom) {
+	T get();
+}
 
-		if (Objects.isNull(palindrom))
-			throw new NullPointerException("Brak instancji obiektu palindrom !");
+interface Kontrwarancja<T> {
 
-		if (palindrom.isBlank() || (palindrom.isEmpty()))
-			return false;
+	void set(T instance);
+}
 
-		var palindromUpper = palindrom.replaceAll("\\s+", "");
-		palindromUpper = palindromUpper.toUpperCase();
+class Organism {
+}
 
-		final var palindromLength = palindromUpper.length();
+class Animal
+		extends
+		Organism {
+}
 
-		return test(palindromUpper, 0, palindromLength - 1);
-	}
-
-	static boolean test(final String palindrom, final int forward, final int backward) {
-
-		if (forward == backward)
-			return true;
-
-		if (palindrom.charAt(forward) != palindrom.charAt(backward))
-			return false;
-
-		if (forward < (backward))
-			test(palindrom, forward + 1, backward - 1);
-
-		return true;
-	}
-
+class Cat
+		extends
+		Animal {
 }
