@@ -1,8 +1,11 @@
 package com.codigo.smartstore.sdk.core.operate;
 
+import static com.codigo.smartstore.sdk.core.opearte.SetOperator.union;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.Set;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -69,50 +72,28 @@ class PalindromTests {
 			}
 
 		);
+
+		final Set<Integer> integers = Set.of(1, 3, 5);
+		// final Set<Integer> integers1 = Set.of(1, 3, 5);
+		final Set<Double> doubles = Set.of(2.1, 4.1, 6.1);
+		final Set<Byte> bytes = Set.of((byte) -2, (byte) -4, (byte) -6, (byte) 5);
+		Set<Number> numbers = union(integers, doubles);
+		numbers = union(numbers, bytes);
+		// numbers = union(numbers, integers1);
+
+		numbers.stream()
+				.map(item -> {
+
+					if (item instanceof Integer)
+						return (double) (int) item;
+					else if (item instanceof Double)
+						return (double) item;
+					else if (item instanceof Byte)
+						return (double) (byte) item;
+					else
+						return 0.0;
+				})
+				.sorted()
+				.forEach(System.out::println);
 	}
-
-	@Test
-	void test() {
-
-		final Kontrwarancja<Organism> AnimalK = instance -> System.out.println(instance);
-		final Kontrwarancja<Animal[]> CatK = instance -> System.out.println(instance);
-
-		CatK.set(new Animal[] {});
-		CatK.set(new Cat[] {});
-		// CatK.set(new Organism());
-
-		AnimalK.set(new Animal());
-		AnimalK.set(new Cat());
-		AnimalK.set(new Organism());
-
-		final String str1 = new String("11");
-		final String str2 = new String("1");
-
-		var comp = str1.equals(str2);
-		comp = str1 == str2;
-		System.out.println(comp);
-	}
-}
-
-interface Kowarancja<T> {
-
-	T get();
-}
-
-interface Kontrwarancja<T> {
-
-	void set(T instance);
-}
-
-class Organism {
-}
-
-class Animal
-		extends
-		Organism {
-}
-
-class Cat
-		extends
-		Animal {
 }

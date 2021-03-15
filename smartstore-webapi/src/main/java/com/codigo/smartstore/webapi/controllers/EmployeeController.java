@@ -77,6 +77,16 @@ public class EmployeeController {
 	@ResponseBody
 	public ResponseEntity<List<Employee>> fetchAllEmployees() throws Exception {
 
+		// final SecurityContext context = SecurityContextHolder.getContext();
+		// final Authentication authentication = context.getAuthentication();
+		//
+		// if ((authentication != null) && (authentication.getPrincipal() instanceof
+		// UserDetails)) {
+		//
+		// // CustomUser customUser = (CustomUser) authentication.getPrincipal();
+		// // .. find messages for this user and return them ...
+		// }
+
 		return ResponseEntity.ok(
 			this.data
 		);
